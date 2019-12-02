@@ -6,15 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include
-        android:id="@+id/fcToolbar"
-        layout="@layout/toolbar" />
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fcToolbar"
         android:layout_above="@+id/bottom_navigation_view">
     </FrameLayout>
 
@@ -26,6 +21,6 @@
         android:layout_alignParentStart="true"
         app:menu="@menu/bottom_navigation_view"
         app:labelVisibilityMode="labeled"
-        android:background="#FABE0C"
+        android:background="#B38867"
         />
 </RelativeLayout>

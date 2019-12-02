@@ -5,6 +5,5 @@
         android:id="@+id/tool_settings"
         android:icon="@drawable/ic_asset_settings"
         android:title= "@string/toolbar_settings"
-        android:visible="false"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 </menu>

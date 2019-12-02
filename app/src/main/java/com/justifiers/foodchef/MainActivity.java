@@ -3,37 +3,42 @@ package com.justifiers.foodchef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.justifiers.foodchef.BottomNavigationView.DownloadsFragment;
-import com.justifiers.foodchef.BottomNavigationView.ProfileFragment;
 import com.justifiers.foodchef.BottomNavigationView.SearchFragment;
 import com.justifiers.foodchef.BottomNavigationView.ShoppingListFragment;
+import com.justifiers.foodchef.LoginAndSignUp.LoginFragment;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     // Declare Variables here
     BottomNavigationView bottomNavigation;
-    Toolbar fcTopToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences preferences = getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
+        String language = preferences.getString("Language", "");
+        setLocale(language);
         setContentView(R.layout.activity_main);
 
         // initializing the variables
         bottomNavigation = findViewById(R.id.bottom_navigation_view);
         bottomNavigation.setOnNavigationItemSelectedListener(navListen);
-        fcTopToolbar = findViewById(R.id.fcToolbar);
-        // setting Search as default fragment
-        fcTopToolbar.setTitle("Search");
-        setSupportActionBar(fcTopToolbar);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new SearchFragment())
                 .commit();
@@ -41,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settings, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
     }
 
     // listens to the selected navigation item and sets the fragment for it
@@ -54,27 +62,45 @@ public class MainActivity extends AppCompatActivity {
 
             switch(navItem.getItemId()) {
                 case R.id.nav_search:
-                    fcTopToolbar.setTitle("Search");
                     selectedFrag = new SearchFragment();
                     break;
                 case R.id.nav_downloads:
-                    fcTopToolbar.setTitle("Downloads");
                     selectedFrag = new DownloadsFragment();
                     break;
                 case R.id.nav_shopping_list:
-                    fcTopToolbar.setTitle("Shopping List");
                     selectedFrag = new ShoppingListFragment();
                     break;
                 case R.id.nav_profile:
-                    fcTopToolbar.setTitle("Profile");
                     // make settings visible only for profile fragment
-                    fcTopToolbar.getMenu().findItem(R.id.tool_settings).setVisible(true);
-                    selectedFrag = new ProfileFragment();
+                    selectedFrag = new LoginFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFrag).commit();
+            if(selectedFrag != null){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFrag).commit();
+            }
             return true;
         }
     };
 
+    private void setLocale(String language){
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        if (Build.VERSION.SDK_INT>= 21){
+            config.setLocale(new Locale(language));
+        } else {
+            config.locale = new Locale(language);
+        }
+        resources.updateConfiguration(config, dm);
+        // save the settings
+        SharedPreferences.Editor lang_editor = getSharedPreferences("SettingsActivity", MODE_PRIVATE).edit();
+        lang_editor.putString("Language", language);
+        lang_editor.apply();
+    }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }

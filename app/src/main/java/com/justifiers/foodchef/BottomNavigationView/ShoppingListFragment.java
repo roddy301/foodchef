@@ -15,4 +15,6 @@ public class ShoppingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.shopping_list_fragment, container, false);
     }
+
+
 }

@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ChipGroupTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MaterialButton">
+        <item name="android:background">@drawable/button_round</item>
+        <item name="android:textColorLink">#5F4B4B</item>
+    </style>
+
+    <style name="EditTextForm" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+
+    </style>
+    <style name="FloatingLabelHintText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_general</item>
+    </style>
+
+
 </resources>

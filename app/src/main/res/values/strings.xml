@@ -6,4 +6,112 @@
     <string name="downloads_bottom_navigation_view">Downloads</string>
     <string name="profile_bottom_navigation_view">Profile</string>
     <string name="toolbar_settings">Settings</string>
+
+    <string name="recipe_popular_today">Popular Today</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="password_rule">Should contain alteast 8 characters</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="profile_email">Email</string>
+    <string name="profile_password">Password</string>
+    <string name="password_rule_login">Should contain alteast 8 characters</string>
+    <string name="prof_login">LOG IN</string>
+    <string name="sign_account">Don\'t Have an Account?</string>
+    <string name="prof_sign_up">SIGN UP, IT\'S EASY</string>
+    <string name="prof_name">Name</string>
+    <string name="signUp">SIGN UP</string>
+    <string name="already_account">Already Have an Account?</string>
+    <string name="log_in_here">LOG IN HERE</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Declaring string values for settings activity here -->
+    <!-- creating an string array to store string values of different languages -->
+    <string name="settings_general">General</string>
+    <string name="settings_language">LANGUAGE</string>
+    <!-- creating an string array to store string values of different languages -->
+    <string name="language_default">English</string>
+    <string-array name="settings_language_items">
+        <item>English</item>
+        <item>French</item>
+        <item>Hindi</item>
+        <item>Ukrainian</item>
+    </string-array>
+    <string name="settings_data_usage">DATA USAGE</string>
+    <string name="settings_data_usage_change">Wi-Fi</string>
+    <string-array name="settings_data_usage_items">
+        <item>Wi-Fi</item>
+        <item>Cellular Data</item>
+    </string-array>
+    <string name="settings_video">VIDEO</string>
+    <string name="settings_pictures">PICTURES</string>
+    <string-array name="settings_video_quality_values">
+        <item>480p</item>
+        <item>720p</item>
+    </string-array>
+    <string name="settings_metric">METRIC</string>
+    <string name="settings_imperial">IMPERIAL</string>
+    <string name="settings_content">Content</string>
+    <string name="settings_content_type">CONTENT TYPE</string>
+    <string name="settings_video_quality">VIDEO QUALITY</string>
+    <string name="settings_video_quality_change">720p</string>
+    <string name="settings_measurements">Measurements</string>
+    <!-- Adding string values for profile page -->
+    <string name="profile_image">Profile Image</string>
+    <string name="profile_name">Romal Sehgal</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="profile_favourites">Favourites</string>
+    <string name="profile_time_taken">20 min.</string>
+    <string name="profile_favorites_image">Recipe Image</string>
+    <string name="profile_favourites_food_name">Gulab Jamun</string>
+    <string name="profile_like_count">34</string>
+    <!-- values for edit dialog screen -->
+    <string name="edit_profile_name">Edit Profile</string>
+    <string name="edit_profile_cancel_image">Cancel icon</string>
+    <string name="edit_profile_done">DONE</string>
+    <string name="edit_profile_icon_change">CHANGE icon</string>
+    <string name="edit_profile_confirm_password">Confirm Password</string>
+    <string name="edit_profile_log_out">LOG OUT</string>
+    <string name="edit_text_profile_name">Name</string>
+    <string name="edit_text_email">Email</string>
+    <string name="edit_text_password">Password</string>
+    <string name="edit_text_password_rule">Should be no less than 8 characters long</string>
+    <!-- values for search bar screen -->
+    <string name="search_hint">Search Recipes</string>
+    <string name="keyword_breakfast">Breakfast</string>
+    <string name="keyword_lunch">Lunch</string>
+    <string name="keyword_dinner">Dinner</string>
+    <string name="keyword_indian">Indian</string>
+    <string name="keyword_continental">Continental</string>
+    <string name="keyword_ukrainian">Ukrainian</string>
+    <string name="keyword_french">French</string>
+    <string name="keyword_dessert">Dessert</string>
+    <string name="recipe_popular">Popular Today</string>
+    <string name="recipe_image_view">Recipe_Image</string>
+    <string name="recipe_popular_today_time">40 MIN</string>
+    <string name="recipe_popular_today_recipe">Rogan Josh</string>
+    <string name="recipe_favorite_icon">like</string>
+    <string name="recipe_download_option">Download</string>
+    <string name="recipe_share_option">Share</string>
+    <string name="recipe_like_count">100</string>
+    <string name="recipe_dinner">Dinner</string>
+    <string name="speak_now">Speak Now</string>
+    <string name="search_bar_hint">Enter some text to search</string>
+    <string-array name="query_suggestions">
+        <item>Rogan Josh</item>
+        <item>Paneer Makhani</item>
+        <item>Dal Makhani</item>
+        <item>Biryani</item>
+    </string-array>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">"Automatically download attachments for incoming emails     "</string>
+    <string name="search_title">search_area</string>
 </resources>

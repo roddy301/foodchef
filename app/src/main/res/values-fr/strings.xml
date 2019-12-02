@@ -1,0 +1,117 @@
+<resources>
+    <string name="app_name">FoodChef</string>
+    <!-- Declaring title names for bottom navigation view below -->
+    <string name="search_bottom_navigation_view">Chercher</string>
+    <string name="shopping_list_bottom_navigation_view">Liste de courses</string>
+    <string name="downloads_bottom_navigation_view">téléchargements</string>
+    <string name="toolbar_settings">Paramètres</string>
+
+    <string name="recipe_popular_today">Populaire aujourd\'hui</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="profile_email">Email</string>
+    <string name="profile_password">Mot de passe</string>
+    <string name="password_rule_login">Devrait contenir au moins 8 caractères</string>
+    <string name="prof_login">S\'IDENTIFIER</string>
+    <string name="sign_account">Vous n\'avez pas de compte?</string>
+    <string name="prof_name">prénom</string>
+    <string name="already_account">Vous avez déjà un compte?</string>
+    <string name="log_in_here">CONNECTEZ-VOUS ICI</string>
+    <string name="title_activity_settings">Paramètres</string>
+
+    <!-- Declaring string values for settings activity here -->
+    <!-- creating an string array to store string values of different languages -->
+    <string name="settings_general">Générale</string>
+    <string name="settings_language">LA LANGUE</string>
+    <!-- creating an string array to store string values of different languages -->
+    <string name="language_default">Anglais</string>
+    <string-array name="settings_language_items">
+        <item>Anglais</item>
+        <item>Français</item>
+        <item>Hindi</item>
+        <item>ukrainien</item>
+    </string-array>
+    <string name="settings_data_usage">L\'utilisation de données</string>
+    <string name="settings_data_usage_change">Wi-Fi</string>
+    <string-array name="settings_data_usage_items">
+        <item>Wi-Fi</item>
+        <item>Cellular Data</item>
+    </string-array>
+    <string name="settings_video">VIDÉO</string>
+    <string name="settings_pictures">DES PHOTOS</string>
+    <string-array name="settings_video_quality_values">
+        <item>480p</item>
+        <item>720p</item>
+    </string-array>
+    <string name="settings_metric">МЕТРИКА</string>
+    <string name="settings_imperial">IMPÉRIAL</string>
+    <string name="settings_content">Contenu</string>
+    <string name="settings_content_type">Type de contenu</string>
+    <string name="settings_video_quality">QUALITÉ VIDÉO</string>
+    <string name="settings_video_quality_change">720p</string>
+    <string name="settings_measurements">Des mesures</string>
+    <!-- Adding string values for profile page -->
+    <string name="profile_image">Image de profil</string>
+    <string name="profile_name">Romal Sehgal</string>
+    <string name="edit_profile_button">Editer le profil</string>
+    <string name="profile_favourites">Favoris</string>
+    <string name="profile_time_taken">20 min.</string>
+    <string name="profile_favorites_image">Image de recette</string>
+    <string name="profile_favourites_food_name">Gulab Jamun</string>
+    <string name="profile_like_count">34</string>
+    <!-- values for edit dialog screen -->
+    <string name="edit_profile_name">Editer le profil</string>
+    <string name="edit_profile_cancel_image">Icône Annuler</string>
+    <string name="edit_profile_done">TERMINÉ</string>
+    <string name="edit_profile_icon_change">Icône de changement</string>
+    <string name="edit_profile_confirm_password">Confirmez le mot de passe</string>
+    <string name="edit_profile_log_out">CONNECTEZ - OUT</string>
+    <string name="edit_text_profile_name">prénom</string>
+    <string name="edit_text_email">Email</string>
+    <string name="edit_text_password_rule">Ne devrait pas contenir moins de 8 caractères</string>
+    <!-- values for search bar screen -->
+    <string name="search_hint">Recherche de recettes</string>
+    <string name="keyword_breakfast">Petit déjeuner</string>
+    <string name="keyword_lunch">Le déjeuner</string>
+    <string name="keyword_dinner">Dîner</string>
+    <string name="keyword_indian">Indien</string>
+    <string name="keyword_continental">Continentale</string>
+    <string name="keyword_ukrainian">Ukrainian</string>
+    <string name="keyword_french">French</string>
+    <string name="keyword_dessert">Dessert</string>
+    <string name="recipe_popular">Populaire aujourd\'hui</string>
+    <string name="recipe_image_view">Recette_Image</string>
+    <string name="recipe_popular_today_time">40 MIN</string>
+    <string name="recipe_popular_today_recipe">Rogan Josh</string>
+    <string name="recipe_favorite_icon">Comme</string>
+    <string name="recipe_share_option">Partager</string>
+    <string name="recipe_like_count">100</string>
+    <string name="recipe_dinner">Dîner</string>
+    <string name="speak_now">Parlez maintenant</string>
+    <string-array name="query_suggestions">
+        <item>Rogan Josh</item>
+        <item>Paneer Makhani</item>
+        <item>Dal Makhani</item>
+        <item>Biryani</item>
+    </string-array>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Votre signature</string>
+    <string name="reply_title">Action de réponse par défaut</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Synchroniser les courriels périodiquement</string>
+    <string name="attachment_title">Télécharger les pièces jointes entrantes</string>
+    <string name="search_title">Zone de recherche</string>
+    <string name="attachment_summary_on">Télécharger automatiquement les pièces jointes pour les emails entrants</string>
+    <string name="edit_text_password">Mot de passe</string>
+    <string name="password_rule">Devrait contenir au moins 8 caractères</string>
+    <string name="prof_sign_up">INSCRIVEZ-VOUS, C\'EST FACILE</string>
+    <string name="profile_bottom_navigation_view">Profil</string>
+    <string name="recipe_download_option">Télécharger</string>
+    <string name="signUp">S\'INSCRIRE</string>
+    <string name="search_bar_hint">Entrez du texte à rechercher</string>
+</resources>

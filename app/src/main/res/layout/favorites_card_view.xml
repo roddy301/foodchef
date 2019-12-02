@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:id="@+id/profile_recipe_image_view"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/recipe_image_view" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_favourites_time"
+            android:layout_marginStart="44dp"
+            android:textColor="@color/color_general"
+            android:layout_below="@+id/profile_recipe_image_view"
+            android:text="@string/recipe_popular_today_time"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/profile_favourites_time"
+            android:id="@+id/profile_favourites_food_name"
+            android:text="@string/profile_favourites_food_name"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_favourites_food_name">
+
+            <ToggleButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="44dp"
+                android:id="@+id/profile_favorite_icon"
+                android:background="@drawable/toggle_like_dislike"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/profile_recipe_likes"
+                android:text="@string/recipe_like_count"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginStart="54dp"
+                android:id="@+id/profile_favourite_share"
+                android:src="@drawable/ic_share"></ImageButton>
+        </LinearLayout>
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>
