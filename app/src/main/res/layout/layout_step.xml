@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="5">
+
+    <ImageView
+        android:id="@+id/img_step"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_asset_image_placeholder" />
+
+    <TextView
+        android:id="@+id/txt_step_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="2"
+        style="@style/Body2"
+        tools:text="Wash and dry spinach. Peel and mince shallot and garlic. Heat olive oil in a pan over medium heat. Add half the shallot and garlic and fry for approx. 2 min. Add spinach and cook until wilted. Season with salt, pepper, and nutmeg, and remove from heat. Transfer to a sieve to cool." />
+</LinearLayout>

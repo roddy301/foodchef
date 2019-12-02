@@ -114,4 +114,9 @@
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">"Automatically download attachments for incoming emails     "</string>
     <string name="search_title">search_area</string>
+
+    <!-- Instructions -->
+    <string name="next_btn_title_instruct">Next Step</string>
+    <string name="next_btn_title_finish">Finish</string>
+
 </resources>

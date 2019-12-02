@@ -9,19 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProfile.EditProfile"
+        <activity
+            android:name=".EditProfile.EditProfile"
             android:configChanges="locale"></activity>
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".SettingsActivity"
             android:configChanges="locale"></activity>
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:configChanges="locale">
+        <activity
+            android:name=".Instructions.InstructionsActivity"
+            android:configChanges="locale"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="locale"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
