@@ -22,6 +22,14 @@
     <string name="already_account">Already Have an Account?</string>
     <string name="log_in_here">LOG IN HERE</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="recipeName" translatable="false">Recipe Name</string>
+    <string name="recipeDuration">Duration:</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="servings">SERVINGS</string>
+    <string name="addTO">Add To Shopping List</string>
+    <string name="utensils">Utensils</string>
+    <string name="nutritionalTitle">Nutrition Facts</string>
+    <string name="start">BEGIN PREPARATION</string>
 
     <!-- Declaring string values for settings activity here -->
     <!-- creating an string array to store string values of different languages -->

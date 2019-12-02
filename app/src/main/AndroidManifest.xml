@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RecipeView"
+            android:exported="true"></activity>
         <activity
             android:name=".EditProfile.EditProfile"
-            android:configChanges="locale"></activity>
+            android:configChanges="locale" />
         <activity
             android:name=".SettingsActivity"
-            android:configChanges="locale"></activity>
+            android:configChanges="locale" />
         <activity
             android:name=".Instructions.InstructionsActivity"
-            android:configChanges="locale"></activity>
+            android:configChanges="locale"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:configChanges="locale"

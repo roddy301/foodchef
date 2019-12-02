@@ -9,4 +9,9 @@
     <color name="orange_pressed">#86470f</color>
     <color name="white">#ffffff</color>
     <color name="color_general">#B38867</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWood">#B38867</color>
+    <color name="colorGrey">#A6A6A6</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorLightWood">#CDCDC0</color>
 </resources>

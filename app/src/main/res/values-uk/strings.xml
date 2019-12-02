@@ -21,6 +21,14 @@
     <string name="log_in_here">ПІДКЛЮЧИТИ ТУТ</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="recipeDuration">Тривалість:</string>
+    <string name="ingredients">Інгредієнти</string>
+    <string name="servings">ПОСЛУГИ</string>
+    <string name="addTO">Додати до списку покупок</string>
+    <string name="utensils">Посуд</string>
+    <string name="nutritionalTitle">Факти харчування</string>
+    <string name="start">Почніть підготовку</string>
+
     <!-- Declaring string values for settings activity here -->
     <!-- creating an string array to store string values of different languages -->
     <string name="settings_general">Загальні</string>

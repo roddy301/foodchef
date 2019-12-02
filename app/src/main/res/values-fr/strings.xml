@@ -19,6 +19,14 @@
     <string name="log_in_here">CONNECTEZ-VOUS ICI</string>
     <string name="title_activity_settings">Paramètres</string>
 
+    <string name="recipeDuration">Durée:</string>
+    <string name="ingredients">Ingrédients</string>
+    <string name="servings">Portions</string>
+    <string name="addTO">Ajouter à la liste d"'"achats</string>
+    <string name="utensils">Ustensiles</string>
+    <string name="nutritionalTitle">Apports nutritionnels</string>
+    <string name="start">COMMENCER LA PRÉPARATION</string>
+
     <!-- Declaring string values for settings activity here -->
     <!-- creating an string array to store string values of different languages -->
     <string name="settings_general">Générale</string>

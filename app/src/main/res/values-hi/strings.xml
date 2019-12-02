@@ -22,6 +22,14 @@
     <string name="log_in_here">यहां लॉगिन करें</string>
     <string name="title_activity_settings">सेटिंग्स</string>
 
+    <string name="recipeDuration">अवधि:</string>
+    <string name="ingredients">सामग्री</string>
+    <string name="servings">सर्विंग</string>
+    <string name="addTO">खरीदारी की सूची में जोड़ें</string>
+    <string name="utensils">बर्तन</string>
+    <string name="nutritionalTitle">पोषण तथ्य</string>
+    <string name="start">तैयारी शुरू करें</string>
+
     <!-- Declaring string values for settings activity here -->
     <!-- creating an string array to store string values of different languages -->
     <string name="settings_general">सामान्य</string>
