@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,8 @@ import java.util.Locale;
 import static android.content.Context.MODE_PRIVATE;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHolder> {
+
+    private static final String TAG = "RecipeAdapter";
 
     ArrayList<Recipe> recipeList;
     private Context ctx;
@@ -140,9 +143,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    Log.d(TAG, "onClick: card is selected");
+
                     if(listener != null){
                         int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
+                        if(position != RecyclerView.NO_POSITION) {
+                            Log.d(TAG, "onClick: listener is invoked");
                             listener.onItemClick(position);
                         }
                     }

@@ -1,7 +1,16 @@
 package com.justifiers.foodchef.Recipe;
 
 
-public class Recipe  {
+import com.justifiers.foodchef.Instructions.InstructionItem;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Recipe implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String utensils;
     private Object ingredients;
     private String likes;
     private String rImage;
@@ -12,76 +21,40 @@ public class Recipe  {
     private String rTime;
     private String rType;
     private String rTypeFr;
-    private String rTypeUk;
+    private String rTypeUa;
     private String rTypeHi;
     private String rVideo;
-
-    public Recipe(Object ingredients, String likes, String rImage, String rName, String rTime, String rType, String rVideo, String rNameFr
-    , String rNameHi, String rNameUk, String rTypeHi, String rTypeFr, String rTypeUk) {
-        this.ingredients = ingredients;
-        this.likes = likes;
-        this.rImage = rImage;
-        this.rName = rName;
-        this.rTime = rTime;
-        this.rType = rType;
-        this.rVideo = rVideo;
-        this.rNameFr = rNameFr;
-        this.rNameHi = rNameHi;
-        this.rNameUk = rNameUk;
-        this.rTypeHi = rTypeHi;
-        this.rTypeFr = rTypeFr;
-        this.rTypeUk = rTypeUk;
-    }
+    private String rDescription;
+    private List<InstructionItem> rInstructionSteps;
 
     public Recipe() {
     }
 
-    public String getrNameFr() {
-        return rNameFr;
-    }
-
-    public void setrNameFr(String rNameFr) {
+    public Recipe(String utensils, Object ingredients, String likes, String rImage, String rName, String rNameFr, String rNameUk, String rNameHi, String rTime, String rType, String rTypeFr, String rTypeUa, String rTypeHi, String rVideo, String rDescription, List<InstructionItem> rInstructionSteps) {
+        this.utensils = utensils;
+        this.ingredients = ingredients;
+        this.likes = likes;
+        this.rImage = rImage;
+        this.rName = rName;
         this.rNameFr = rNameFr;
-    }
-
-    public String getrNameUk() {
-        return rNameUk;
-    }
-
-    public void setrNameUk(String rNameUk) {
         this.rNameUk = rNameUk;
-    }
-
-    public String getrNameHi() {
-        return rNameHi;
-    }
-
-    public void setrNameHi(String rNameHi) {
         this.rNameHi = rNameHi;
-    }
-
-    public String getrTypeFr() {
-        return rTypeFr;
-    }
-
-    public void setrTypeFr(String rTypeFr) {
+        this.rTime = rTime;
+        this.rType = rType;
         this.rTypeFr = rTypeFr;
-    }
-
-    public String getrTypeUk() {
-        return rTypeUk;
-    }
-
-    public void setrTypeUk(String rTypeUk) {
-        this.rTypeUk = rTypeUk;
-    }
-
-    public String getrTypeHi() {
-        return rTypeHi;
-    }
-
-    public void setrTypeHi(String rTypeHi) {
+        this.rTypeUa = rTypeUa;
         this.rTypeHi = rTypeHi;
+        this.rVideo = rVideo;
+        this.rDescription = rDescription;
+        this.rInstructionSteps = rInstructionSteps;
+    }
+
+    public String getUtensils() {
+        return utensils;
+    }
+
+    public void setUtensils(String utensils) {
+        this.utensils = utensils;
     }
 
     public Object getIngredients() {
@@ -116,6 +89,30 @@ public class Recipe  {
         this.rName = rName;
     }
 
+    public String getrNameFr() {
+        return rNameFr;
+    }
+
+    public void setrNameFr(String rNameFr) {
+        this.rNameFr = rNameFr;
+    }
+
+    public String getrNameUk() {
+        return rNameUk;
+    }
+
+    public void setrNameUk(String rNameUk) {
+        this.rNameUk = rNameUk;
+    }
+
+    public String getrNameHi() {
+        return rNameHi;
+    }
+
+    public void setrNameHi(String rNameHi) {
+        this.rNameHi = rNameHi;
+    }
+
     public String getrTime() {
         return rTime;
     }
@@ -124,12 +121,36 @@ public class Recipe  {
         this.rTime = rTime;
     }
 
-    public String getRType() {
+    public String getrType() {
         return rType;
     }
 
-    public void setRType(String rType) {
+    public void setrType(String rType) {
         this.rType = rType;
+    }
+
+    public String getrTypeFr() {
+        return rTypeFr;
+    }
+
+    public void setrTypeFr(String rTypeFr) {
+        this.rTypeFr = rTypeFr;
+    }
+
+    public String getrTypeUa() {
+        return rTypeUa;
+    }
+
+    public void setrTypeUa(String rTypeUa) {
+        this.rTypeUa = rTypeUa;
+    }
+
+    public String getrTypeHi() {
+        return rTypeHi;
+    }
+
+    public void setrTypeHi(String rTypeHi) {
+        this.rTypeHi = rTypeHi;
     }
 
     public String getrVideo() {
@@ -138,5 +159,42 @@ public class Recipe  {
 
     public void setrVideo(String rVideo) {
         this.rVideo = rVideo;
+    }
+
+    public String getrDescription() {
+        return rDescription;
+    }
+
+    public void setrDescription(String rDescription) {
+        this.rDescription = rDescription;
+    }
+
+    public List<InstructionItem> getrInstructionSteps() {
+        return rInstructionSteps;
+    }
+
+    public void setrInstructionSteps(List<InstructionItem> rInstructionSteps) {
+        this.rInstructionSteps = rInstructionSteps;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "ingredients=" + ingredients +
+                ", likes='" + likes + '\'' +
+                ", rImage='" + rImage + '\'' +
+                ", rName='" + rName + '\'' +
+                ", rNameFr='" + rNameFr + '\'' +
+                ", rNameUk='" + rNameUk + '\'' +
+                ", rNameHi='" + rNameHi + '\'' +
+                ", rTime='" + rTime + '\'' +
+                ", rType='" + rType + '\'' +
+                ", rTypeFr='" + rTypeFr + '\'' +
+                ", rTypeUa='" + rTypeUa + '\'' +
+                ", rTypeHi='" + rTypeHi + '\'' +
+                ", rVideo='" + rVideo + '\'' +
+                ", rDescription='" + rDescription + '\'' +
+                ", rInstructionSteps=" + rInstructionSteps +
+                '}';
     }
 }

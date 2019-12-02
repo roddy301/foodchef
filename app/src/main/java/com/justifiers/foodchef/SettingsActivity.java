@@ -192,13 +192,14 @@ public class SettingsActivity extends AppCompatActivity  {
         }
         resources.updateConfiguration(config, dm);
         // save the settings
-        SharedPreferences.Editor lang_editor = getSharedPreferences("SettingsActivity", MODE_PRIVATE).edit();
+
+        SharedPreferences.Editor lang_editor = getApplicationContext().getSharedPreferences("SettingsActivity", MODE_PRIVATE).edit();
         lang_editor.putString("Language", language);
         lang_editor.apply();
     }
 
     public void loadLocale(){
-        SharedPreferences preferences = getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
         String language = preferences.getString("Language", "");
         setLocale(language);
 

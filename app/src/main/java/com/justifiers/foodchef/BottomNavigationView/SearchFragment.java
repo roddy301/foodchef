@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.justifiers.foodchef.R;
 import com.justifiers.foodchef.Recipe.Recipe;
 import com.justifiers.foodchef.Recipe.RecipeAdapter;
+import com.justifiers.foodchef.RecipeView;
+import com.justifiers.foodchef.Utilities.LanguageManager;
 import com.wanderingcan.persistentsearch.PersistentSearchView;
 import com.wanderingcan.persistentsearch.SearchMenuItem;
 
@@ -47,6 +49,9 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class SearchFragment extends Fragment {
+
+    private static final String RECIPE = "RecipeInformation";
+    private static final String TAG = "SearchFragment";
 
     // Declare Variables here
     DatabaseReference ref;
@@ -76,10 +81,14 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View searchView =  inflater.inflate(R.layout.search_fragment, container, false);
         SharedPreferences preferences = getActivity().getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
+
         language = preferences.getString("Language", "");
         mAuth = FirebaseAuth.getInstance();
+
         ref = FirebaseDatabase.getInstance().getReference().child("Recipe");
+
         System.out.println(ref);
+
         recipe_dinner = searchView.findViewById(R.id.recipe_dinner);
         recyclerView = searchView.findViewById(R.id.recycler_view);
         recyclerView_dinner = searchView.findViewById(R.id.recycler_view_dinner);
@@ -97,13 +106,13 @@ public class SearchFragment extends Fragment {
                 if (chip != null) {
                     ArrayList<Recipe> rlist = new ArrayList<>();
                     for (Recipe object : recipeList) {
-                        if (object.getRType().contains((chip.getText().toString()))) {
+                        if (object.getrType().contains((chip.getText().toString()))) {
                             rlist.add(object);
                         } else if(object.getrTypeHi().contains((chip.getText().toString()))){
                             rlist.add(object);
                         } else if(object.getrTypeFr().contains((chip.getText().toString()))){
                             rlist.add(object);
-                        } else if(object.getrTypeUk().contains((chip.getText().toString()))){
+                        } else if(object.getrTypeUa().contains((chip.getText().toString()))){
                             rlist.add(object);
                         }
                     }
@@ -184,42 +193,51 @@ public class SearchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: start");
+
         if (ref != null) {
+            Log.d(TAG, "onStart: ref is not null");
+
             ref.addValueEventListener(new ValueEventListener() {
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Log.d(TAG, "onDataChange: starts");
+
                     if (dataSnapshot.exists()) {
                         recipeList = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren())
                             recipeList.add(ds.getValue(Recipe.class));
 
                     }
+
                     layoutManager = new GridLayoutManager(getActivity(), 2);
                     recyclerView.setLayoutManager(layoutManager);
+
                     recipeAdapter = new RecipeAdapter(recipeList, getActivity());
                     Log.e("WDWD", "FIRST_ADAPTER");
                     recyclerView.setAdapter(recipeAdapter);
                     recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-
+                            Recipe recipe = recipeList.get(position);
+                            Intent intent = new Intent(getContext(), RecipeView.class);
+                            intent.putExtra(SearchFragment.RECIPE, recipe);
+                            getContext().startActivity(intent);
                         }
 
                         @Override
                         public void onLikeClick(final int position) {
                             Map<String, Object> favorites_recipe = new HashMap<>();
-                            if (language.equals("en")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrName());
-                            } else if (language.equals("fr")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameFr());
-                            } else if (language.equals("hi")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameHi());
-                            } else if (language.equals("uk")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameUk());
-                            }
-                            favorites_recipe.put("rImage", recipeList.get(position).getrImage());
-                            favorites_recipe.put("rTime", recipeList.get(position).getrTime());
-                            favorites_recipe.put("rLikes", recipeList.get(position).getLikes());
+
+                            Recipe recipe = recipeList.get(position);
+                            String name = new LanguageManager(getActivity(), recipe.getrName(), recipe.getrNameFr(), recipe.getrNameHi(), recipe.getrTypeUa()).getTranslatedText();
+
+                            favorites_recipe.put("rName", name);
+                            favorites_recipe.put("rImage", recipe.getrImage());
+                            favorites_recipe.put("rTime", recipe.getrTime());
+                            favorites_recipe.put("rLikes", recipe.getLikes());
 
                             try {
                                 final String userId = mAuth.getCurrentUser().getUid();

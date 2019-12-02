@@ -64,18 +64,20 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="1080px"
-            android:layout_height="210dp"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
             android:id="@+id/videoLayout"
             android:orientation="vertical"
             android:layout_below="@id/header_layout">
+
             <VideoView
                 android:id="@+id/video_view"
-                android:layout_marginRight="0dp"
+                android:layout_margin="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="5dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -100,22 +102,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/durationValue"
                 android:layout_marginStart="1dp"
-                android:textColor="@color/colorWood"
-                android:textSize="16dp"
-                android:textStyle="normal" />
-
-            <Button
-                android:id="@+id/favoriteButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="225dp"
-                android:background="@drawable/ic_favorite_unfilled" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/favCountText"
-                android:layout_marginLeft="5dp"
                 android:textColor="@color/colorWood"
                 android:textSize="16dp"
                 android:textStyle="normal" />
@@ -220,6 +206,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ingredients"
             android:layout_below="@+id/ingredientsLayout">
+
 
         </TableLayout>
 
