@@ -9,7 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
+        android:id="@+id/scrollView"
+        android:scrollbarSize="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,6 +62,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="@font/raleway_semibold"
                 android:text="@string/recipeName"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
@@ -93,18 +95,21 @@
             android:orientation="horizontal"
             android:layout_below="@id/videoLayout"
             android:id="@+id/descriptionLayout"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="10dp">
 
             <TextView
+                android:fontFamily="@font/raleway_semibold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="@string/recipeDuration"
                 android:textColor="@color/colorWood"
                 android:textSize="16dp"
+                android:typeface="sans"
                 android:textStyle="normal" />
 
             <TextView
+                android:fontFamily="@font/raleway_semibold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/durationValue"
@@ -119,14 +124,18 @@
             android:id="@+id/textDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="14dp"
-            android:textStyle="normal"
-            android:textColor="@color/colorBlack"
             android:layout_below="@id/descriptionLayout"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/raleway"
+            android:textColor="@color/colorBlack"
+            android:textSize="16dp"
+            android:textStyle="normal" />
 
         <TextView
+            android:fontFamily="@font/raleway_semibold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ingredients"
@@ -160,6 +169,7 @@
                 android:text="@string/servings"
                 android:textColor="@color/colorBlack"
                 android:textSize="16dp"
+                android:fontFamily="@font/raleway_semibold"
                 android:textStyle="normal"
                 android:layout_margin="5dp"/>
 
@@ -177,6 +187,7 @@
 
                 <nl.dionsegijn.steppertouch.StepperTouch
                     android:id="@+id/stepperTouch"
+                    android:fontFamily="@font/raleway_semibold"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="3dp"
@@ -204,6 +215,7 @@
             android:layout_width="296dp"
             android:layout_height="50dp"
             android:background="@drawable/button_round_addto"
+            android:fontFamily="@font/raleway_semibold"
             android:layout_gravity="center"
             android:text="@string/addTO"
             android:layout_below="@id/ingredients"
@@ -214,6 +226,7 @@
             android:layout_height="wrap_content"
             android:text="@string/utensils"
             android:textColor="@color/colorBlack"
+            android:fontFamily="@font/raleway_semibold"
             android:textSize="18dp"
             android:textStyle="bold"
             android:layout_margin="5dp"
@@ -232,17 +245,21 @@
             android:id="@+id/utensils"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="16dp"
-            android:textStyle="normal"
-            android:textColor="@color/colorBlack"
             android:layout_below="@id/line2"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/raleway"
+            android:textColor="@color/colorBlack"
+            android:textSize="16dp"
+            android:textStyle="normal" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nutritionalTitle"
+            android:fontFamily="@font/raleway_semibold"
             android:textColor="@color/colorBlack"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -267,14 +284,7 @@
 
         </TableLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_my_icon"
-            android:contentDescription="@string/submit"
-            android:layout_margin="16dp" />
+
 
         <Button
             android:id="@+id/startPreparation"
@@ -284,6 +294,7 @@
             android:background="@drawable/button_round"
             android:layout_gravity="center"
             android:text="@string/start"
+            android:fontFamily="@font/raleway_semibold"
             android:layout_below="@id/nutritionFact"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
