@@ -35,8 +35,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.justifiers.foodchef.R;
 import com.justifiers.foodchef.Recipe.Recipe;
 import com.justifiers.foodchef.Recipe.RecipeAdapter;
-import com.justifiers.foodchef.RecipeView;
-import com.justifiers.foodchef.Utilities.LanguageManager;
 import com.wanderingcan.persistentsearch.PersistentSearchView;
 import com.wanderingcan.persistentsearch.SearchMenuItem;
 
@@ -46,12 +44,10 @@ import java.util.List;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 
 public class SearchFragment extends Fragment {
-
-    private static final String RECIPE = "RecipeInformation";
-    private static final String TAG = "SearchFragment";
 
     // Declare Variables here
     DatabaseReference ref;
@@ -72,6 +68,9 @@ public class SearchFragment extends Fragment {
     ChipGroup chip_selection;
     FrameLayout frameLayout;
     String language;
+    View divider_dinner;
+    View divider_popular;
+    TextView popular_today_text;
     private boolean micEnabled;
     private static final int VOICE_RECOGNITION_CODE = 9999;
 
@@ -81,21 +80,20 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View searchView =  inflater.inflate(R.layout.search_fragment, container, false);
         SharedPreferences preferences = getActivity().getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
-
         language = preferences.getString("Language", "");
         mAuth = FirebaseAuth.getInstance();
-
         ref = FirebaseDatabase.getInstance().getReference().child("Recipe");
-
         System.out.println(ref);
-
-        recipe_dinner = searchView.findViewById(R.id.recipe_dinner);
+        recipe_dinner = searchView.findViewById(R.id.recipe_dinner_text);
         recyclerView = searchView.findViewById(R.id.recycler_view);
         recyclerView_dinner = searchView.findViewById(R.id.recycler_view_dinner);
         persistentSearchView = searchView.findViewById(R.id.search_bar);
         frameLayout = searchView.findViewById(R.id.search_bar_frame);
-
+        divider_dinner = searchView.findViewById(R.id.search_divider_dinner);
         pullToRefresh = searchView.findViewById(R.id.swipe_container);
+        popular_today_text = searchView.findViewById(R.id.popular_today);
+        divider_popular = searchView.findViewById(R.id.popular_today_divider);
+
 
         micEnabled = isIntentAvailable(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
         chip_selection = searchView.findViewById(R.id.search_chips);
@@ -106,7 +104,7 @@ public class SearchFragment extends Fragment {
                 if (chip != null) {
                     ArrayList<Recipe> rlist = new ArrayList<>();
                     for (Recipe object : recipeList) {
-                        if (object.getrType().contains((chip.getText().toString()))) {
+                        if (object.getRType().contains((chip.getText().toString()))) {
                             rlist.add(object);
                         } else if(object.getrTypeHi().contains((chip.getText().toString()))){
                             rlist.add(object);
@@ -123,6 +121,8 @@ public class SearchFragment extends Fragment {
                         recyclerView.setAdapter(adapter);
                         recyclerView_dinner.setAlpha(0);
                         recipe_dinner.setAlpha(0);
+                        popular_today_text.setText("Results Found");
+                        divider_dinner.setVisibility(View.INVISIBLE);
                     }
                 }
             }
@@ -165,7 +165,6 @@ public class SearchFragment extends Fragment {
             }
         });
 
-
         persistentSearchView.setOnMenuItemClickListener(new PersistentSearchView.OnMenuItemClickListener() {
             @Override
             public void onMenuItemClick(SearchMenuItem item) {
@@ -193,94 +192,61 @@ public class SearchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart: start");
-
         if (ref != null) {
-            Log.d(TAG, "onStart: ref is not null");
-
             ref.addValueEventListener(new ValueEventListener() {
-
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    Log.d(TAG, "onDataChange: starts");
-
                     if (dataSnapshot.exists()) {
                         recipeList = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren())
                             recipeList.add(ds.getValue(Recipe.class));
 
                     }
-
+                    Log.e("RecipeList: ",recipeList.toString());
                     layoutManager = new GridLayoutManager(getActivity(), 2);
                     recyclerView.setLayoutManager(layoutManager);
-
-                    recipeAdapter = new RecipeAdapter(recipeList, getActivity());
-                    Log.e("WDWD", "FIRST_ADAPTER");
-                    recyclerView.setAdapter(recipeAdapter);
-                    recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            Recipe recipe = recipeList.get(position);
-                            Intent intent = new Intent(getContext(), RecipeView.class);
-                            intent.putExtra(SearchFragment.RECIPE, recipe);
-                            getContext().startActivity(intent);
-                        }
-
-                        @Override
-                        public void onLikeClick(final int position) {
-                            Map<String, Object> favorites_recipe = new HashMap<>();
-
-                            Recipe recipe = recipeList.get(position);
-                            String name = new LanguageManager(getActivity(), recipe.getrName(), recipe.getrNameFr(), recipe.getrNameHi(), recipe.getrTypeUa()).getTranslatedText();
-
-                            favorites_recipe.put("rName", name);
-                            favorites_recipe.put("rImage", recipe.getrImage());
-                            favorites_recipe.put("rTime", recipe.getrTime());
-                            favorites_recipe.put("rLikes", recipe.getLikes());
-
-                            try {
-                                final String userId = mAuth.getCurrentUser().getUid();
-                                ref_user_favourites = FirebaseDatabase.getInstance().getReference().child("User").child(userId).child("favourites").child(recipeList.get(position).getrName());
-                                ref_user_favourites.updateChildren(favorites_recipe);
-                            } catch (NullPointerException e){
-                                Toast.makeText(getActivity(), "Login or SignUp is required to add the recipe to favourites", Toast.LENGTH_SHORT).show();
+                    if(getActivity() != null){
+                        recipeAdapter = new RecipeAdapter(recipeList, getActivity());
+                        recyclerView.setAdapter(recipeAdapter);
+                        recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
                             }
-                        }
 
-                        @Override
-                        public void onUnLikeClick(int position) {
-//                            if (mAuth.getCurrentUser().getUid() != null) {
-//                                String userId = mAuth.getCurrentUser().getUid();
-//                                ref_user_favourites_unlike = FirebaseDatabase.getInstance().getReference().child("User").child(userId).child("favourites").child(recipeList.get(position).getrName());
-//                                ref_user_favourites_unlike.removeValue();
-//                            } else {
-//                                Toast.makeText(getActivity(), "Login/SignUp is required", Toast.LENGTH_SHORT).show();
-//                            }
-                        }
-                    });
-                }
+                            @Override
+                            public void onLikeClick(final int position) {
+                                Map<String, Object> favorites_recipe = new HashMap<>();
+                                if (language.equals("fr")) {
+                                    favorites_recipe.put("rName", recipeList.get(position).getrNameFr());
+                                } else if (language.equals("hi")) {
+                                    favorites_recipe.put("rName", recipeList.get(position).getrNameHi());
+                                } else if (language.equals("uk")) {
+                                    favorites_recipe.put("rName", recipeList.get(position).getrNameUa());
+                                } else {
+                                    favorites_recipe.put("rName", recipeList.get(position).getrName());
+                                }
+                                favorites_recipe.put("rImage", recipeList.get(position).getrImage());
+                                favorites_recipe.put("rTime", recipeList.get(position).getrTime());
+                                favorites_recipe.put("rVideo", recipeList.get(position).getrVideo());
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                                if(mAuth.getCurrentUser() != null){
+                                    final String userId = mAuth.getCurrentUser().getUid();
+                                    ref_user_favourites = FirebaseDatabase.getInstance().getReference().child("User").child(userId).child("favourites").child(recipeList.get(position).getrName());
+                                    ref_user_favourites.updateChildren(favorites_recipe);
+                                }
+                            }
 
-            ref.orderByChild("rType").equalTo("Dinner").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()){
-                        recipeList_dinner = new ArrayList<>();
-                        for(DataSnapshot ds: dataSnapshot.getChildren()){
-                            recipeList_dinner.add(ds.getValue(Recipe.class));
-                        }
-                        layoutManager_dinner = new GridLayoutManager(getActivity(), 2);
-                        recyclerView_dinner.setLayoutManager(layoutManager_dinner);
-                        if(getActivity() != null) {
-                            recipeAdapter_dinner = new RecipeAdapter(recipeList_dinner, getActivity());
-                        }
-                        recyclerView_dinner.setAdapter(recipeAdapter_dinner);
+                            @Override
+                            public void onUnLikeClick(int position) {
+                            if (mAuth.getCurrentUser() != null) {
+                                String userId = mAuth.getCurrentUser().getUid();
+                                ref_user_favourites_unlike = FirebaseDatabase.getInstance().getReference().child("User").child(userId).child("favourites").child(recipeList.get(position).getrName());
+                                ref_user_favourites_unlike.removeValue();
+                            } else {
+                                Toast.makeText(getActivity(), "Login/SignUp is required", Toast.LENGTH_SHORT).show();
+                            }
+                            }
+                        });
                     }
                 }
 
@@ -289,15 +255,16 @@ public class SearchFragment extends Fragment {
                     Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
+            fetch_dinner_recipes();
         }
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                popular_today_text.setText("Popular Today");
+                recipe_dinner.setText("Dinner");
                 onStart();
-                chip_selection.clearCheck();
-                persistentSearchView.clearFocus();
-                persistentSearchView.openSearch();
                 persistentSearchView.setNavigationDrawable(getResources().getDrawable(R.drawable.ic_search));
                 persistentSearchView.setShowSearchMenu(true);
                 final Handler handler = new Handler();
@@ -311,6 +278,8 @@ public class SearchFragment extends Fragment {
                 }, 1000);
             }
         });
+        chip_selection.clearCheck();
+        persistentSearchView.closeSearch();
     }
 
 
@@ -323,6 +292,8 @@ public class SearchFragment extends Fragment {
         }
         layoutManager = new GridLayoutManager(getActivity(), 2);
         if(getActivity() != null){
+            divider_dinner.setVisibility(View.INVISIBLE);
+            recipe_dinner.setVisibility(View.INVISIBLE);
             RecipeAdapter adapter = new RecipeAdapter(rlist, getActivity());
             Log.e("WDWDWA", "SECOND_ADAPTER");
             recyclerView.setLayoutManager(layoutManager);
@@ -336,6 +307,7 @@ public class SearchFragment extends Fragment {
                     toast.show();
                 }
             }, 4000);
+            popular_today_text.setText("Results Found");
         }
     }
 
@@ -371,5 +343,30 @@ public class SearchFragment extends Fragment {
                     this.getString(R.string.speak_now));
             startActivityForResult(intent, VOICE_RECOGNITION_CODE);
         }
+    }
+
+    public void fetch_dinner_recipes(){
+        ref.orderByChild("rType").equalTo("Dinner").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    recipeList_dinner = new ArrayList<>();
+                    for(DataSnapshot ds: dataSnapshot.getChildren()){
+                        recipeList_dinner.add(ds.getValue(Recipe.class));
+                    }
+                    layoutManager_dinner = new GridLayoutManager(getActivity(), 2);
+                    recyclerView_dinner.setLayoutManager(layoutManager_dinner);
+                    if(getActivity() != null) {
+                        recipeAdapter_dinner = new RecipeAdapter(recipeList_dinner, getActivity());
+                    }
+                    recyclerView_dinner.setAdapter(recipeAdapter_dinner);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

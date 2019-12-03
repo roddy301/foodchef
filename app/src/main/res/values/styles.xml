@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">#F5F5F5</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="ChipGroupTheme" parent="Theme.MaterialComponents.Light">
@@ -13,6 +15,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="EditTextFields" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Customize your theme here. -->
+            <item name="hintTextAppearance">@style/FloatingLabelHintText</item>
+            <item name="errorTextAppearance">@color/colorAccent</item>
+            <item name="boxStrokeColor">@color/color_general</item>
+            <item name="android:fontFamily">@font/raleway_semibold</item>
     </style>
 
     <style name="MaterialButton">
@@ -46,4 +56,13 @@
         <item name="android:textColor">#DE000000</item>
         <item name="android:textSize">14.14sp</item>
     </style>
+    <!-- Follow this style for unfilled buttons -->
+    <style name="ButtonTextStyleEmpty">
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="android:textColor">#865730</item>
+        <item name="android:textSize">14.14sp</item>
+    </style>
+
+
+
 </resources>

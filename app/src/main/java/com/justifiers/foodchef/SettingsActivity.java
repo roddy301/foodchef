@@ -102,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity  {
                 lDialog.show();
             }
         });
+        language_change.setText("hello");
         data_usage_change = findViewById(R.id.settings_data_usage_change);
         data_usage_items = getResources().getStringArray(R.array.settings_data_usage_items);
 
@@ -202,6 +203,5 @@ public class SettingsActivity extends AppCompatActivity  {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
         String language = preferences.getString("Language", "");
         setLocale(language);
-
     }
 }
