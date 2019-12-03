@@ -36,6 +36,7 @@ import com.justifiers.foodchef.R;
 import com.justifiers.foodchef.Recipe.Recipe;
 import com.justifiers.foodchef.Recipe.RecipeAdapter;
 import com.justifiers.foodchef.RecipeView;
+import com.justifiers.foodchef.Utilities.LanguageManager;
 import com.wanderingcan.persistentsearch.PersistentSearchView;
 import com.wanderingcan.persistentsearch.SearchMenuItem;
 
@@ -229,18 +230,14 @@ public class SearchFragment extends Fragment {
                         @Override
                         public void onLikeClick(final int position) {
                             Map<String, Object> favorites_recipe = new HashMap<>();
-                            if (language.equals("en")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrName());
-                            } else if (language.equals("fr")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameFr());
-                            } else if (language.equals("hi")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameHi());
-                            } else if (language.equals("uk")) {
-                                favorites_recipe.put("rName", recipeList.get(position).getrNameUk());
-                            }
-                            favorites_recipe.put("rImage", recipeList.get(position).getrImage());
-                            favorites_recipe.put("rTime", recipeList.get(position).getrTime());
-                            favorites_recipe.put("rLikes", recipeList.get(position).getLikes());
+
+                            Recipe recipe = recipeList.get(position);
+                            String name = new LanguageManager(getActivity(), recipe.getrName(), recipe.getrNameFr(), recipe.getrNameHi(), recipe.getrTypeUa()).getTranslatedText();
+
+                            favorites_recipe.put("rName", name);
+                            favorites_recipe.put("rImage", recipe.getrImage());
+                            favorites_recipe.put("rTime", recipe.getrTime());
+                            favorites_recipe.put("rLikes", recipe.getLikes());
 
                             try {
                                 final String userId = mAuth.getCurrentUser().getUid();

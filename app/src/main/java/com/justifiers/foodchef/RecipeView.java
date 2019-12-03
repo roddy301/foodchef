@@ -1,16 +1,12 @@
 package com.justifiers.foodchef;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -21,25 +17,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import com.google.firebase.database.core.Tag;
+import com.justifiers.foodchef.BottomNavigationView.SearchFragment;
+import com.justifiers.foodchef.Instructions.InstructionsActivity;
 import com.justifiers.foodchef.Recipe.Recipe;
 
-import android.view.SurfaceHolder;
+import java.io.Serializable;
 
 import nl.dionsegijn.steppertouch.OnStepCallback;
 import nl.dionsegijn.steppertouch.StepperTouch;
 
 public class RecipeView extends AppCompatActivity {
 
+    private static final String STEP_INSTRUCTIONS = "Step instructions";
     private static final String RECIPE = "RecipeInformation";
     private static final String TAG = "RecipeView";
 
+    private Button btnBeginPreparation;
     private TextView recipe_name;
     private Button download;
     private Button favorite;
@@ -116,6 +110,7 @@ public class RecipeView extends AppCompatActivity {
             }
         });
 
+        setupPreparationButton();
     }
 
     protected void setupVideo() {
@@ -147,6 +142,20 @@ public class RecipeView extends AppCompatActivity {
             @Override
             public void onScrollChanged() {
                 mediaController.hide();
+            }
+        });
+    }
+
+    protected void setupPreparationButton() {
+
+        btnBeginPreparation = findViewById(R.id.startPreparation);
+        btnBeginPreparation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RecipeView.this, InstructionsActivity.class);
+                intent.putExtra(RecipeView.STEP_INSTRUCTIONS, (Serializable) recipe.getrInstructionSteps());
+                RecipeView.this.startActivity(intent);
             }
         });
     }

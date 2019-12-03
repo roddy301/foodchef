@@ -122,4 +122,8 @@
     <string name="prof_sign_up">साइन अप करें, यह आसान है</string>
     <string name="settings_metric">मीट्रिक</string>
     <string name="search_bar_hint">खोज करने के लिए कुछ पाठ दर्ज करें</string>
+
+    <!-- Instructions -->
+    <string name="next_btn_title_instruct">अगला कदम</string>
+    <string name="next_btn_title_finish">समाप्त</string>
 </resources>

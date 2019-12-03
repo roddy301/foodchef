@@ -42,7 +42,7 @@ public class InstructionsViewPagerAdapter extends PagerAdapter {
 
 
         TextView txtInstruction = layoutStep.findViewById(R.id.txt_step_description);
-        txtInstruction.setText(step.getrDescription());
+        txtInstruction.setText(step.getDescription(mContext));
 
         container.addView(layoutStep);
         return layoutStep;

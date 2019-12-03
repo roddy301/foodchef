@@ -3,6 +3,7 @@ package com.justifiers.foodchef.Instructions;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.justifiers.foodchef.R;
+import com.justifiers.foodchef.Recipe.Recipe;
+import com.justifiers.foodchef.RecipeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ enum PositionState {TO_LAST, FROM_LAST, TO_FIRST, FROM_FIRST, NONE}
 
 public class InstructionsActivity extends AppCompatActivity {
 
+    private static final String STEP_INSTRUCTIONS = "Step instructions";
     private static final String TAG = "InstructionsActivity";
 
     private Button btnNextStep;
@@ -103,20 +107,8 @@ public class InstructionsActivity extends AppCompatActivity {
 
     protected void configureViewPager() {
 
-        // TODO: Remove test data
-        String imageOne = "https://images.kitchenstories.io/wagtailOriginalImages/R1815-photo-step-1/R1815-photo-step-1-large-landscape-150.jpg";
-        String descOne = "Peel parsnips. Fill a large pot with cold water. Season with salt, then add parsnips and bring to a boil. Cook under very tender, approx. 15 min.";
-
-        String imageTwo = "https://images.kitchenstories.io/wagtailOriginalImages/R1815-photo-step-2/R1815-photo-step-2-large-landscape-150.jpg";
-        String descTwo = "In the meantime, roughly chop Kalamata olives, capers, garlic, parsley, and mint, then add to a bowl. Zest the lemon over the bowl, then add the lemon juice and olive oil. Season with salt and pepper and mix to combine.";
-
-        String imageThree = "https://images.kitchenstories.io/wagtailOriginalImages/R1815-photo-step-4/R1815-photo-step-4-large-landscape-150.jpg";
-        String descThree = "Once the parsnips are tender, drain them and season with salt. Add butter, milk and nutmeg to the pot, mix to combine, then purée with a hand mixer.";
-
-        steps = new ArrayList<>();
-        steps.add(new InstructionItem(descOne, imageOne));
-        steps.add(new InstructionItem(descTwo, imageTwo));
-        steps.add(new InstructionItem(descThree, imageThree));
+        Intent intent = getIntent();
+        steps = (List<InstructionItem>) intent.getSerializableExtra(InstructionsActivity.STEP_INSTRUCTIONS);
 
         stepPager = findViewById(R.id.steps_view_pager);
         instructionsViewPagerAdapter = new InstructionsViewPagerAdapter(this, steps);
