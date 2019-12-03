@@ -32,6 +32,9 @@ import com.justifiers.foodchef.Recipe.Recipe;
 
 import android.view.SurfaceHolder;
 
+import nl.dionsegijn.steppertouch.OnStepCallback;
+import nl.dionsegijn.steppertouch.StepperTouch;
+
 public class RecipeView extends AppCompatActivity {
 
     private static final String RECIPE = "RecipeInformation";
@@ -70,13 +73,7 @@ public class RecipeView extends AppCompatActivity {
 
         setupVideo();
 
-        ScrollView scrollView = findViewById(R.id.scrollView);
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                mediaController.hide();
-            }
-        });
+
 
         TextView duration = findViewById(R.id.durationValue);
         duration.setText(recipe.getrTime());
@@ -108,30 +105,14 @@ public class RecipeView extends AppCompatActivity {
             }
         });
 
-        minus = findViewById(R.id.minusRecipe);
-        add = findViewById(R.id.addRecipe);
-        serving = findViewById(R.id.sevingCount);
-
-        minus.setOnClickListener(new View.OnClickListener() {
+        StepperTouch stepperTouch = findViewById(R.id.stepperTouch);
+        stepperTouch.setMinValue(0);
+        stepperTouch.setMaxValue(3);
+        stepperTouch.setSideTapEnabled(true);
+        stepperTouch.addStepCallback(new OnStepCallback() {
             @Override
-            public void onClick(View v) {
-                int count = Integer.parseInt(serving.getText().toString());
-                if (count > 1) {
-                    count--;
-                    String value = String.valueOf(count);
-                    serving.setText(value);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Serving cannot be less than 1", Toast.LENGTH_SHORT);
-                }
-            }
-        });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.parseInt(serving.getText().toString());
-                count++;
-                String value = String.valueOf(count);
-                serving.setText(value);
+            public void onStep(int value, boolean positive) {
+                Toast.makeText(getApplicationContext(), value + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -141,7 +122,7 @@ public class RecipeView extends AppCompatActivity {
 
         videoURL = recipe.getrVideo();
         Uri uri;
-        uri = Uri.parse(videoURL);
+        uri = Uri.parse("https://drive.google.com/file/d/1CeIy3h2jTtGN72aVhtTTK0N4-V0NKxRq/view?usp=sharing");
 
         videoView = findViewById(R.id.video_view);
         mediaController = new MediaController(RecipeView.this);
@@ -160,6 +141,14 @@ public class RecipeView extends AppCompatActivity {
         videoView.setVideoURI(uri);
         videoView.requestFocus();
         videoView.start();
+
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                mediaController.hide();
+            }
+        });
     }
 
 }
