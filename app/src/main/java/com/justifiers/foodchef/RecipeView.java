@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import nl.dionsegijn.steppertouch.OnStepCallback;
 import nl.dionsegijn.steppertouch.StepperTouch;
 
+
 public class RecipeView extends AppCompatActivity {
 
     private static final String STEP_INSTRUCTIONS = "Step instructions";
@@ -50,6 +51,7 @@ public class RecipeView extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Context ctx;
+
 
 
     String url = "https://foodchef-d5481.firebaseio.com/";
@@ -75,10 +77,8 @@ public class RecipeView extends AppCompatActivity {
 
         setupVideo();
 
-
         TextView recipeName = findViewById(R.id.recipe_name);
         recipeName.setText(recipe.getrName());
-
 
         TextView duration = findViewById(R.id.durationValue);
         duration.setText(recipe.getrTime());
@@ -177,7 +177,6 @@ public class RecipeView extends AppCompatActivity {
             }
         });
     }
-
     /*protected void dowloadData (){
         String URL = "https://foodchef-d5481.firebaseio.com/Recipe.json";
 
@@ -187,5 +186,6 @@ public class RecipeView extends AppCompatActivity {
 
 
     }
+
 }
 
