@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.justifiers.foodchef.R;
 import com.justifiers.foodchef.Recipe.Recipe;
 import com.justifiers.foodchef.Recipe.RecipeAdapter;
+import com.justifiers.foodchef.RecipeView;
 import com.wanderingcan.persistentsearch.PersistentSearchView;
 import com.wanderingcan.persistentsearch.SearchMenuItem;
 
@@ -73,6 +74,8 @@ public class SearchFragment extends Fragment {
     TextView popular_today_text;
     private boolean micEnabled;
     private static final int VOICE_RECOGNITION_CODE = 9999;
+    private static final String RECIPE = "RecipeInformation";
+    private static final String TAG = "SearchFragment";
 
 
     @Nullable
@@ -82,8 +85,8 @@ public class SearchFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("SettingsActivity", Activity.MODE_PRIVATE);
         language = preferences.getString("Language", "");
         mAuth = FirebaseAuth.getInstance();
-        ref = FirebaseDatabase.getInstance().getReference().child("Recipe");
         System.out.println(ref);
+        // initializing the variables here
         recipe_dinner = searchView.findViewById(R.id.recipe_dinner_text);
         recyclerView = searchView.findViewById(R.id.recycler_view);
         recyclerView_dinner = searchView.findViewById(R.id.recycler_view_dinner);
@@ -93,10 +96,11 @@ public class SearchFragment extends Fragment {
         pullToRefresh = searchView.findViewById(R.id.swipe_container);
         popular_today_text = searchView.findViewById(R.id.popular_today);
         divider_popular = searchView.findViewById(R.id.popular_today_divider);
-
-
+        ref = FirebaseDatabase.getInstance().getReference().child("Recipe");
         micEnabled = isIntentAvailable(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
         chip_selection = searchView.findViewById(R.id.search_chips);
+
+        // listens to chip group listener to see which chip has been clicked to perform the action
         chip_selection.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -104,7 +108,7 @@ public class SearchFragment extends Fragment {
                 if (chip != null) {
                     ArrayList<Recipe> rlist = new ArrayList<>();
                     for (Recipe object : recipeList) {
-                        if (object.getRType().contains((chip.getText().toString()))) {
+                        if (object.getrType().contains((chip.getText().toString()))) {
                             rlist.add(object);
                         } else if(object.getrTypeHi().contains((chip.getText().toString()))){
                             rlist.add(object);
@@ -189,21 +193,27 @@ public class SearchFragment extends Fragment {
         return searchView;
     }
 
+    // when app opens search fragment is opened by default which will performing operations for fetching recipe items from firebase
+    // and listing into popular today and dinner views
     @Override
     public void onStart() {
         super.onStart();
         if (ref != null) {
+            // listens to firebase database referenced location by addValueEventListener function
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         recipeList = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren())
+                            // appends the recipe details into recipeList arraylist
                             recipeList.add(ds.getValue(Recipe.class));
 
                     }
                     Log.e("RecipeList: ",recipeList.toString());
+                    // sets the grid view layout to set layout view for embedding recycler view into it
                     layoutManager = new GridLayoutManager(getActivity(), 2);
+                    // sets recycler view
                     recyclerView.setLayoutManager(layoutManager);
                     if(getActivity() != null){
                         recipeAdapter = new RecipeAdapter(recipeList, getActivity());
@@ -211,6 +221,10 @@ public class SearchFragment extends Fragment {
                         recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(int position) {
+                                Recipe recipe = recipeList.get(position);
+                                Intent intent = new Intent(getContext(), RecipeView.class);
+                                intent.putExtra(SearchFragment.RECIPE, recipe);
+                                getContext().startActivity(intent);
                             }
 
                             @Override
@@ -221,7 +235,7 @@ public class SearchFragment extends Fragment {
                                 } else if (language.equals("hi")) {
                                     favorites_recipe.put("rName", recipeList.get(position).getrNameHi());
                                 } else if (language.equals("uk")) {
-                                    favorites_recipe.put("rName", recipeList.get(position).getrNameUa());
+                                    favorites_recipe.put("rName", recipeList.get(position).getrNameUk());
                                 } else {
                                     favorites_recipe.put("rName", recipeList.get(position).getrName());
                                 }
@@ -259,11 +273,13 @@ public class SearchFragment extends Fragment {
             fetch_dinner_recipes();
         }
 
+        // on refresh reloads the views
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 popular_today_text.setText("Popular Today");
                 recipe_dinner.setText("Dinner");
+                recyclerView_dinner.setVisibility(View.VISIBLE);
                 onStart();
                 persistentSearchView.setNavigationDrawable(getResources().getDrawable(R.drawable.ic_search));
                 persistentSearchView.setShowSearchMenu(true);
@@ -298,16 +314,17 @@ public class SearchFragment extends Fragment {
             Log.e("WDWDWA", "SECOND_ADAPTER");
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
-            Toast.makeText(getActivity(), "Recipes Fetched Successfully!", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "Recipes Fetched Successfully!", Toast.LENGTH_LONG).show();
             persistentSearchView.setNavigationDrawable(getResources().getDrawable(R.drawable.ic_search));
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Toast toast = Toast.makeText(getActivity(), "Pull Down to load all Recipies back", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }, 4000);
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Toast toast = Toast.makeText(getActivity(), "Pull Down to load all Recipies back", Toast.LENGTH_LONG);
+//                    toast.show();
+//                }
+//            }, 4000);
             popular_today_text.setText("Results Found");
+            recyclerView_dinner.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -346,6 +363,8 @@ public class SearchFragment extends Fragment {
     }
 
     public void fetch_dinner_recipes(){
+        // listens to recipe collection and gets the sub-child by "r-type" name to see if it equals to Dinner to fetch
+        // recipes related to dinner
         ref.orderByChild("rType").equalTo("Dinner").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

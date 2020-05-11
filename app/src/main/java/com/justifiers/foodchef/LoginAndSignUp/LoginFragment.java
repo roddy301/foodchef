@@ -52,10 +52,10 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View loginView =  inflater.inflate(R.layout.login_fragment, container, false);
         setHasOptionsMenu(true);
+        // initializing the variables here
         lToolbar = loginView.findViewById(R.id.lToolbar);
         lToolbar.setTitle("Profile");
         ((AppCompatActivity) getActivity()).setSupportActionBar(lToolbar);
-
         firebaseAuth = FirebaseAuth.getInstance();
         login_email_field = loginView.findViewById(R.id.login_email_layout);
         login_email = loginView.findViewById(R.id.login_email);
@@ -69,6 +69,7 @@ public class LoginFragment extends Fragment {
 
             }
 
+            // enables the password toggle when start entering the password
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (login_password.getText().toString().length() > 0)
@@ -84,6 +85,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // listens to login button on click
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +114,9 @@ public class LoginFragment extends Fragment {
                             login_password.requestFocus();
                         }
                     }
+                    // checks if email and password fields are not empty
                     if (!email.isEmpty() && !password.isEmpty() && password.length() > 8 && email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                        // signs-in with email and password
                         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -130,10 +134,12 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+        // listens to sign-up button on click
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(getActivity() != null) {
+                    // opens the sign-up fragment if user does not have existing account
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new SignUpFragment())
                             .commit();
@@ -141,6 +147,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // it checks whether user has logged in before, so if the user has logged first time
+        // they will not be asked next time to login in again
+        // and will be redirected to profile fragment
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

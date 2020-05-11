@@ -41,6 +41,7 @@ import java.io.IOException;
 
 public class EditProfile extends AppCompatActivity {
 
+    // declare variables here
     ImageButton changeUploadImage;
     ImageView showImage;
     ImageButton closeButton;
@@ -67,7 +68,7 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-
+        // initializing the variables
         editProfileReadName = findViewById(R.id.edit_profile_name);
         editProfileReadEmail = findViewById(R.id.edit_profile_email);
         editProfileChangePassword = findViewById(R.id.edit_profile_password);
@@ -81,23 +82,30 @@ public class EditProfile extends AppCompatActivity {
         showImage = findViewById(R.id.edit_profile_image);
         closeButton = findViewById(R.id.edit_profile_close_icon);
         changeUploadImage = findViewById(R.id.edit_profile_change_icon);
+        // listens to upload image button
         changeUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // calls the select image function to choose image from device storage
                 selectImage();
             }
         });
+        // listens to close button if user nothing wants to save
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // returns to previous fragment on back press
                 EditProfile.super.onBackPressed();
             }
         });
 
+        // initializing firebase Authentication instance
         firebaseAuth = FirebaseAuth.getInstance();
+        // fetches the reference for current user who has logged in
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        // gets reference to user collection
         databaseReference = firebaseDatabase.getReference("User");
         databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -114,6 +122,7 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        // listens to log out button
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +132,7 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        // listens to done text view and saves the details of what user has saved details about
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,7 +178,9 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
+    // choose images from device storage from device storage
     public void selectImage() {
+        // creates intent object to initiate action
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

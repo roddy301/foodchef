@@ -36,6 +36,9 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
 
     @Override
     public void onBindViewHolder(@NonNull favouritesHolder holder,final int position) {
+        // binds all the favourite items to view
+
+        // loads the recipe image using picasso
         Picasso.get().load(favouritesList.get(position).getrImage()).into(holder.profile_recipe_image);
         holder.profile_recipe_time.setText(favouritesList.get(position).getrName());
         holder.profile_recipe_name.setText(favouritesList.get(position).getrName());
@@ -58,6 +61,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
     }
 
     public class favouritesHolder extends  RecyclerView.ViewHolder {
+        // declare favourite recipe_items here
         ImageView profile_recipe_image;
         TextView profile_recipe_time;
         TextView profile_recipe_name;
@@ -65,6 +69,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
         ImageButton profile_favourite_share;
         public favouritesHolder(@NonNull View itemView) {
             super(itemView);
+            // initializing variables here
             profile_recipe_image = itemView.findViewById(R.id.profile_recipe_image_view);
             profile_recipe_time = itemView.findViewById(R.id.profile_favourites_time);
             profile_recipe_name = itemView.findViewById(R.id.profile_favourites_food_name);

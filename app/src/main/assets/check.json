@@ -1,0 +1,32 @@
+{
+        "Recipe" : [ {
+                "ingredients" : {
+                        "rice" : {
+                                "price" : "$3.0",
+                                "qty" : "1 kilogram"
+                        },
+                        "tomato" : {
+                                "price" : "$2.45",
+                                "qty" : "500 grams"
+                        }
+                },
+                "likes" : "50",
+                "rImage" : "https://firebasestorage.googleapis.com/v0/b/foodchef-d5481.appspot.com/o/biryani.jpg?alt=media&token=5c850095-6159-4cec-bfbb-4769ad69548c",
+                "rName" : "biryani",
+                "rTime" : "45 min.",
+                "rType" : "Lunch",
+                "rVideo" : "https://firebasestorage.googleapis.com/v0/b/foodchef-d5481.appspot.com/o/recipe_videos%2Fsample.mp4?alt=media&token=a23bf37a-4aee-4af7-96c1-d0f7054a8ce5"
+        }, {
+                "ingredients" : {
+                        "paneer" : {
+                                "price" : "$4.60",
+                                "qty" : "700 grams"
+                        }
+                },
+                "likes" : "75",
+                "rImage" : "https://firebasestorage.googleapis.com/v0/b/foodchef-d5481.appspot.com/o/panner_makhani.jpg?alt=media&token=cce419ec-cf73-4751-8720-2491a2eea587",
+                "rName" : "panner_makhani",
+                "rTime" : "50 min.",
+                "rType" : "Dinner",
+                "rVideo" : "https://firebasestorage.googleapis.com/v0/b/foodchef-d5481.appspot.com/o/recipe_videos%2Fsample.mp4?alt=media&token=a23bf37a-4aee-4af7-96c1-d0f7054a8ce5"
+        } ]}

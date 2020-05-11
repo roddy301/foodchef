@@ -31,6 +31,7 @@ import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity  {
 
+    // declare the variables here
     TextView language_change;
     TextView video_quality_change;
     TextView data_usage_change;
@@ -51,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         loadLocale();
         setContentView(R.layout.activity_settings);
+        // initializing the variables
         content_type_video = findViewById(R.id.settings_video);
         content_type_pictures = findViewById(R.id.settings_pictures);
         measurements_imperial = findViewById(R.id.settings_imperial);
@@ -70,9 +72,11 @@ public class SettingsActivity extends AppCompatActivity  {
         sToolbar.setTitle(getResources().getString(R.string.toolbar_settings));
         language_change = findViewById(R.id.settings_lang_change);
         language_items = getResources().getStringArray(R.array.settings_language_items);
+        // on textview click opens up the alert dialog
         language_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // using alert dialog builder class, alert dialog is completed
                 final AlertDialog.Builder language_builder = new AlertDialog.Builder(SettingsActivity.this);
                 language_builder.setSingleChoiceItems(language_items, -1, new DialogInterface.OnClickListener() {
                     @Override
@@ -96,13 +100,14 @@ public class SettingsActivity extends AppCompatActivity  {
                             recreate();
                         }
                         dialogInterface.dismiss();
+                        language_change.setText(language_items[i]);
                     }
                 });
                 AlertDialog lDialog = language_builder.create();
                 lDialog.show();
             }
         });
-        language_change.setText("hello");
+//        language_change.setText("hello");
         data_usage_change = findViewById(R.id.settings_data_usage_change);
         data_usage_items = getResources().getStringArray(R.array.settings_data_usage_items);
 
@@ -182,6 +187,7 @@ public class SettingsActivity extends AppCompatActivity  {
         });
     }
 
+    // handling the localization in setLocale and loadLocale
     private void setLocale(String language){
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();

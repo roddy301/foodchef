@@ -78,18 +78,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
         return new recipeHolder(view, rlistener);
     }
 
+    // binds the recipe items into the view
     @Override
     public void onBindViewHolder(final recipeHolder holder, final int position) {
+        // loads the image into imageview by getting image url from firebase
         Picasso.get().load(recipeList.get(position).getrImage()).into(holder.recipeImage);
         if(language.equals("fr")){
             holder.recipeName.setText(recipeList.get(position).getrNameFr());
         } else if(language.equals("uk")){
-            holder.recipeName.setText(recipeList.get(position).getrNameUa());
+            holder.recipeName.setText(recipeList.get(position).getrNameUk());
         } else if(language.equals("hi")){
             holder.recipeName.setText(recipeList.get(position).getrNameHi());
         } else {
             holder.recipeName.setText(recipeList.get(position).getrName());
         }
+        // if the user is logged in, enable the option to add recipe to favourites otherwise disable it
         if(mAuth.getCurrentUser() != null){
             ref_user_favourites = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("favourites").child(recipeList.get(position).getrName());
             ref_user_favourites.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,6 +110,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
         }
 
         holder.recipeTime.setText(recipeList.get(position).getrTime());
+        // listens to recipe pop-up button that includes share and download clickables
         holder.recipe_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,11 +141,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
 
     @Override
     public int getItemCount() {
+        // returns the length of the recipelist arraylist
         return recipeList.size();
     }
 
 
     public class recipeHolder extends RecyclerView.ViewHolder {
+        // declare recipe_items variable here
         ImageView recipeImage;
         TextView recipeName;
         TextView recipeTime;
@@ -150,6 +156,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
 
         public recipeHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
+            // initializing the variables here
             recipeImage = itemView.findViewById(R.id.recycler_popular_today_image_view);
             recipeName = itemView.findViewById(R.id.recycler_popular_recipe_desc);
             recipeTime = itemView.findViewById(R.id.recycler_popular_today_time);

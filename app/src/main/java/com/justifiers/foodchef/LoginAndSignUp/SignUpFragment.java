@@ -55,6 +55,7 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View signUpView = inflater.inflate(R.layout.sign_up_fragment, container, false);
         setHasOptionsMenu(true);
+        // initializing the variables here
         firebaseAuth = FirebaseAuth.getInstance();
         sign_up_email_layout = signUpView.findViewById(R.id.sign_up_email_layout);
         sign_up_name_layout = signUpView.findViewById(R.id.sign_up_name_layout);
@@ -74,6 +75,7 @@ public class SignUpFragment extends Fragment {
 
             }
 
+            // sets the password toggle enabled when the user clicks on the password field
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (sign_up_password.getText().toString().length() > 0)
@@ -89,6 +91,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        // listens to the sign up button on click
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

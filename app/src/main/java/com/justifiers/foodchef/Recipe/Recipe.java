@@ -1,6 +1,7 @@
 package com.justifiers.foodchef.Recipe;
 
 
+import com.justifiers.foodchef.Ingredient;
 import com.justifiers.foodchef.Instructions.InstructionItem;
 
 import java.io.Serializable;
@@ -8,10 +9,11 @@ import java.util.List;
 
 public class Recipe implements Serializable {
 
+    // declare your variables here
     private static final long serialVersionUID = 1L;
 
     private String Utensils;
-    private Object ingredients;
+    private List<Ingredient> ingredients;
     private String likes;
     private String rImage;
     private String rName;
@@ -27,11 +29,13 @@ public class Recipe implements Serializable {
     private String rDescription;
     private List<InstructionItem> rInstructionSteps;
 
+    // initializing the empty constructor
     public Recipe() {
     }
 
-    public Recipe(String Utensils, Object ingredients, String likes, String rImage, String rName, String rNameFr, String rNameUk, String rNameHi, String rTime, String rType, String rTypeFr, String rTypeUa, String rTypeHi, String rVideo, String rDescription, List<InstructionItem> rInstructionSteps) {
-        this.Utensils = Utensils;
+  
+    public Recipe(String utensils, List<Ingredient> ingredients, String likes, String rImage, String rName, String rNameFr, String rNameUk, String rNameHi, String rTime, String rType, String rTypeFr, String rTypeUa, String rTypeHi, String rVideo, String rDescription, List<InstructionItem> rInstructionSteps) {
+        Utensils = utensils;
         this.ingredients = ingredients;
         this.likes = likes;
         this.rImage = rImage;
@@ -49,6 +53,9 @@ public class Recipe implements Serializable {
         this.rInstructionSteps = rInstructionSteps;
     }
 
+
+    // getters and setters here
+
     public String getUtensils() {
         return Utensils;
     }
@@ -57,11 +64,11 @@ public class Recipe implements Serializable {
         this.Utensils = utensils;
     }
 
-    public Object getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Object ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

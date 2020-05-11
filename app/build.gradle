@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.wanderingcan.widget:persistentsearch:1.2.2'
     implementation 'com.mindorks.android:prdownloader:0.5.0'
+    implementation 'com.github.DanielMartinus:Stepper-Touch:1.0.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.squareup.picasso:picasso:2.71828'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
