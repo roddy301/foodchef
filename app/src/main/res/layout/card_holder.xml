@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:id="@+id/recycler_popular_today_image_view"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/recipe_image_view" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_popular_today_time"
+            android:layout_marginStart="44dp"
+            android:textColor="@color/color_general"
+            android:layout_below="@+id/recycler_popular_today_image_view"
+            android:text="@string/recipe_popular_today_time"/>
+
+        <ImageButton
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/recipe_popup"
+            android:background="@null"
+            android:layout_below="@+id/recycler_popular_today_image_view"
+            android:layout_toEndOf="@+id/recycler_popular_today_time"
+            android:src="@drawable/ic_more_vert"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/recipe_popup"
+            android:id="@+id/recycler_popular_recipe_desc"
+            android:text="@string/recipe_popular_today_recipe"/>
+
+        <ToggleButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="44dp"
+            android:id="@+id/recipe_favorite_icon"
+            android:background="@drawable/toggle_like_dislike"
+            android:textOff=""
+            android:textOn=""
+            android:layout_below="@+id/recycler_popular_recipe_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="1dp"
+            android:id="@+id/recycler_view_recipe_likes"
+            android:layout_below="@+id/recipe_favorite_icon"
+            android:text="@string/recipe_like_count"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">FoodChef</string>
+    <!-- Declaring title names for bottom navigation view below -->
+    <string name="search_bottom_navigation_view">Пошук</string>
+    <string name="shopping_list_bottom_navigation_view">Список покупок</string>
+    <string name="downloads_bottom_navigation_view">завантажити</string>
+    <string name="profile_bottom_navigation_view">Профіль</string>
+    <string name="toolbar_settings">Налаштування</string>
+
+    <string name="recipe_popular_today">Популярне сьогодні</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="password_rule">Містить не менше 8 символів</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="profile_email">Email</string>
+    <string name="profile_password">Пароль</string>
+    <string name="password_rule_login">Містить не менше 8 символів</string>
+    <string name="sign_account">У вас немає облікового запису?</string>
+    <string name="prof_name">Ім\'я</string>
+    <string name="signUp">ПІДТРИМКА</string>
+    <string name="already_account">Вже є аккаунт?</string>
+    <string name="log_in_here">ПІДКЛЮЧИТИ ТУТ</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="recipeDuration">Тривалість:</string>
+    <string name="ingredients">Інгредієнти</string>
+    <string name="servings">ПОСЛУГИ</string>
+    <string name="addTO">Додати до списку покупок</string>
+    <string name="utensils">Посуд</string>
+    <string name="nutritionalTitle">Факти харчування</string>
+    <string name="start">Почніть підготовку</string>
+
+    <!-- Declaring string values for settings activity here -->
+    <!-- creating an string array to store string values of different languages -->
+    <string name="settings_general">Загальні</string>
+    <string name="settings_language">МОВА</string>
+    <!-- creating an string array to store string values of different languages -->
+    <string name="language_default">Англійська</string>
+    <string-array name="settings_language_items">
+        <item>Англійська</item>
+        <item>Французький</item>
+        <item>Хінді</item>
+        <item>Українська</item>
+    </string-array>
+    <string name="settings_data_usage">Використання даних</string>
+    <string name="settings_data_usage_change">В</string>
+    <string-array name="settings_data_usage_items">
+        <item>Wi-Fi</item>
+        <item>Cellular Data</item>
+    </string-array>
+    <string name="settings_video">ВІДЕО</string>
+    <string name="settings_pictures">КАРТИНИ</string>
+    <string-array name="settings_video_quality_values">
+        <item>480p</item>
+        <item>720p</item>
+    </string-array>
+    <string name="settings_metric">MÉTRIQUE</string>
+    <string name="settings_imperial">ІМПЕРІАЛЬНА</string>
+    <string name="settings_content">Зміст</string>
+    <string name="settings_content_type">Тип змісту</string>
+    <string name="settings_video_quality">ЯКІСТЬ ВІДЕО</string>
+    <string name="settings_video_quality_change">720 до н.е.</string>
+    <string name="settings_measurements">Вимірювання</string>
+    <!-- Adding string values for profile page -->
+    <string name="profile_image">Зображення профілю</string>
+    <string name="profile_name">Romal Sehgal</string>
+    <string name="edit_profile_button">Редагувати профіль</string>
+    <string name="profile_favourites">Улюблений</string>
+    <string name="profile_time_taken">20 хв.</string>
+    <string name="profile_favorites_image">Зображення рецепту</string>
+    <string name="profile_favourites_food_name">Гулаб Джамун</string>
+    <string name="profile_like_count">34</string>
+    <!-- values for edit dialog screen -->
+    <string name="edit_profile_name">Редагувати профіль</string>
+    <string name="edit_profile_cancel_image">Піктограма скасування</string>
+    <string name="edit_profile_done">Зроблено</string>
+    <string name="edit_profile_icon_change">Значок ЗМІНИ</string>
+    <string name="edit_profile_confirm_password">Підтвердьте пароль</string>
+    <string name="edit_profile_log_out">ВИЙТИ</string>
+    <string name="edit_text_email">Електронна пошта</string>
+    <string name="edit_text_password">Пароль</string>
+    <string name="edit_text_password_rule">Не має бути менше 8 символів</string>
+    <!-- values for search bar screen -->
+    <string name="search_hint">Рецепти пошуку</string>
+    <string name="keyword_breakfast">Сніданок</string>
+    <string name="keyword_lunch">Обід</string>
+    <string name="keyword_dinner">Вечеря</string>
+    <string name="keyword_indian">Індійська</string>
+    <string name="keyword_continental">Континентальний</string>
+    <string name="keyword_ukrainian">Ukrainian</string>
+    <string name="keyword_french">French</string>
+    <string name="keyword_dessert">Десерт</string>
+    <string name="recipe_popular">Популярне сьогодні</string>
+    <string name="recipe_image_view">Зображення рецепту</string>
+    <string name="recipe_popular_today_time">40 MIN</string>
+    <string name="recipe_popular_today_recipe">Роган Джош</string>
+    <string name="recipe_favorite_icon">Подібно до</string>
+    <string name="recipe_download_option">Завантажити</string>
+    <string name="recipe_share_option">Поділитися</string>
+    <string name="recipe_like_count">100</string>
+    <string name="recipe_dinner">Вечеря</string>
+    <string name="speak_now">Говори зараз</string>
+    <string-array name="query_suggestions">
+        <item>Rogan Josh</item>
+        <item>Paneer Makhani</item>
+        <item>Dal Makhani</item>
+        <item>Biryani</item>
+    </string-array>
+    <!-- Preference Titles -->
+    <string name="messages_header">Повідомлення</string>
+    <string name="sync_header">Синхронізація</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Твій підпис</string>
+    <string name="reply_title">Дія відповіді за замовчуванням</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Періодично синхронізуйте електронну пошту</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Автоматично завантажуйте вкладення для вхідних електронних листів</string>
+    <string name="attachment_summary_off">Завантажуйте вкладення лише за запитом вручну</string>
+    <string name="search_title">Область пошуку</string>
+    <string name="edit_text_profile_name">Ім\'я</string>
+    <string name="prof_login">ВХІД</string>
+    <string name="prof_sign_up">РЕЄСТРУЙТЕ ЗАРАЗ, ЛЕГКО</string>
+    <string name="search_bar_hint">Введіть текст для пошуку</string>
+</resources>

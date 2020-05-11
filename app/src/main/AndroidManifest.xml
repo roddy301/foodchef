@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.justifiers.foodchef">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".RecipeView"
+            android:exported="true"></activity>
+        <activity
+            android:name=".EditProfile.EditProfile"
+            android:configChanges="locale" />
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="locale" />
+        <activity
+            android:name=".Instructions.InstructionsActivity"
+            android:configChanges="locale"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="locale"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

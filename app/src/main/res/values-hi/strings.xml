@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">FoodChef</string>
+    <!-- Declaring title names for bottom navigation view below -->
+    <string name="search_bottom_navigation_view">खोज</string>
+    <string name="shopping_list_bottom_navigation_view">खरीदारी की सूची</string>
+    <string name="downloads_bottom_navigation_view">डाउनलोड</string>
+    <string name="profile_bottom_navigation_view">प्रोफ़ाइल</string>
+    <string name="toolbar_settings">सेटिंग्स</string>
+
+    <string name="recipe_popular_today">लोकप्रिय आज</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="password_rule">कम से कम 8 अक्षर होने चाहिए</string>
+    <!-- Declaring Login/Sign-up string values here -->
+    <string name="profile_email">Email</string>
+    <string name="profile_password">पारण शब्द</string>
+    <string name="password_rule_login">कम से कम 8 अक्षर होने चाहिए</string>
+    <string name="prof_login">लॉग इन करें</string>
+    <string name="sign_account">खाता नहीं है?</string>
+    <string name="prof_name">नाम</string>
+    <string name="signUp">साइन अप करें</string>
+    <string name="already_account">क्या आपके पास पहले से एक खाता मौजूद है?</string>
+    <string name="log_in_here">यहां लॉगिन करें</string>
+    <string name="title_activity_settings">सेटिंग्स</string>
+
+    <string name="recipeDuration">अवधि:</string>
+    <string name="ingredients">सामग्री</string>
+    <string name="servings">सर्विंग</string>
+    <string name="addTO">खरीदारी की सूची में जोड़ें</string>
+    <string name="utensils">बर्तन</string>
+    <string name="nutritionalTitle">पोषण तथ्य</string>
+    <string name="start">तैयारी शुरू करें</string>
+
+    <!-- Declaring string values for settings activity here -->
+    <!-- creating an string array to store string values of different languages -->
+    <string name="settings_general">सामान्य</string>
+    <string name="settings_language">भाषा</string>
+    <!-- creating an string array to store string values of different languages -->
+    <string name="language_default">अंग्रेज़ी</string>
+    <string-array name="settings_language_items">
+        <item>अंग्रेज़ी</item>
+        <item>फ्रेंच</item>
+        <item>हिन्दी</item>
+        <item>यूक्रेनी</item>
+    </string-array>
+    <string name="settings_data_usage">डेटा उपयोग</string>
+    <string name="settings_data_usage_change">वाई - फाई</string>
+    <string-array name="settings_data_usage_items">
+        <item>Wi-Fi</item>
+        <item>Cellular Data</item>
+    </string-array>
+    <string name="settings_video">वीडियो</string>
+    <string name="settings_pictures">चित्रों</string>
+    <string-array name="settings_video_quality_values">
+        <item>480p</item>
+        <item>720p</item>
+    </string-array>
+    <string name="settings_imperial">IMPERIAL</string>
+    <string name="settings_content">सामग्री</string>
+    <string name="settings_content_type">सामग्री प्रकार</string>
+    <string name="settings_video_quality">वीडियो की गुणवत्ता</string>
+    <string name="settings_video_quality_change">720 पी</string>
+    <string name="settings_measurements">माप</string>
+    <!-- Adding string values for profile page -->
+    <string name="profile_image">प्रोफ़ाइल छवि</string>
+    <string name="profile_name">रोमल सहगल</string>
+    <string name="edit_profile_button">प्रोफाइल एडिट करें</string>
+    <string name="profile_favourites">पसंदीदा</string>
+    <string name="profile_time_taken">बीस मिनट।</string>
+    <string name="profile_favorites_image">पकाने की विधि छवि</string>
+    <string name="profile_favourites_food_name">गुलाब जामुन</string>
+    <string name="profile_like_count">34</string>
+    <!-- values for edit dialog screen -->
+    <string name="edit_profile_name">प्रोफाइल एडिट करें</string>
+    <string name="edit_profile_cancel_image">आइकन रद्द करें</string>
+    <string name="edit_profile_done">किया हुआ</string>
+    <string name="edit_profile_confirm_password">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="edit_profile_log_out">लोग आउट</string>
+    <string name="edit_text_profile_name">नाम</string>
+    <string name="edit_text_password">पारण शब्द</string>
+    <string name="edit_text_password_rule">8 अक्षर से कम लंबा नहीं होना चाहिए</string>
+    <!-- values for search bar screen -->
+    <string name="search_hint">रेसिपी खोजें</string>
+    <string name="keyword_breakfast">सुबह का नाश्ता</string>
+    <string name="keyword_lunch">दोपहर का भोजन</string>
+    <string name="keyword_dinner">रात का खाना</string>
+    <string name="keyword_indian">भारतीय</string>
+    <string name="keyword_continental">महाद्वीपीय</string>
+    <string name="keyword_ukrainian">Ukrainian</string>
+    <string name="keyword_french">French</string>
+    <string name="keyword_dessert">मिठाई</string>
+    <string name="recipe_popular">लोकप्रिय आज</string>
+    <string name="recipe_image_view">पकाने की विधि छवि</string>
+    <string name="recipe_popular_today_time">40 MIN</string>
+    <string name="recipe_popular_today_recipe">रोगन जोश</string>
+    <string name="recipe_favorite_icon">पसंद</string>
+    <string name="recipe_download_option">डाउनलोड</string>
+    <string name="recipe_share_option">शेयर</string>
+    <string name="recipe_like_count">100</string>
+    <string name="recipe_dinner">रात का खाना</string>
+    <string name="speak_now">अब बोलो</string>
+    <string-array name="query_suggestions">
+        <item>Rogan Josh</item>
+        <item>Paneer Makhani</item>
+        <item>Dal Makhani</item>
+        <item>Biryani</item>
+    </string-array>
+    <!-- Preference Titles -->
+    <string name="messages_header">संदेश</string>
+    <string name="sync_header">सिंक</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">आपके हस्ताक्षर</string>
+    <string name="reply_title">डिफ़ॉल्ट उत्तर क्रिया</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">ईमेल को समय-समय पर सिंक करें</string>
+    <string name="attachment_title">आने वाले संलग्नक डाउनलोड करें</string>
+    <string name="attachment_summary_on">आने वाले ईमेल के लिए स्वचालित रूप से संलग्नक डाउनलोड करें</string>
+    <string name="search_title">खोज क्षेत्र</string>
+    <string name="edit_profile_icon_change">आइकॉन बदलें</string>
+    <string name="edit_text_email">ईमेल</string>
+    <string name="prof_sign_up">साइन अप करें, यह आसान है</string>
+    <string name="settings_metric">मीट्रिक</string>
+    <string name="search_bar_hint">खोज करने के लिए कुछ पाठ दर्ज करें</string>
+</resources>
