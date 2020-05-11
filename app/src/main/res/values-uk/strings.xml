@@ -27,7 +27,7 @@
     <string name="addTO">Додати до списку покупок</string>
     <string name="utensils">Посуд</string>
     <string name="nutritionalTitle">Факти харчування</string>
-    <string name="start">Почніть підготовку</string>
+    <string name="start">Почати приготування</string>
 
     <!-- Declaring string values for settings activity here -->
     <!-- creating an string array to store string values of different languages -->
@@ -53,8 +53,8 @@
         <item>480p</item>
         <item>720p</item>
     </string-array>
-    <string name="settings_metric">MÉTRIQUE</string>
-    <string name="settings_imperial">ІМПЕРІАЛЬНА</string>
+    <string name="settings_metric">Метрична</string>
+    <string name="settings_imperial">Імперська</string>
     <string name="settings_content">Зміст</string>
     <string name="settings_content_type">Тип змісту</string>
     <string name="settings_video_quality">ЯКІСТЬ ВІДЕО</string>
@@ -123,4 +123,8 @@
     <string name="prof_login">ВХІД</string>
     <string name="prof_sign_up">РЕЄСТРУЙТЕ ЗАРАЗ, ЛЕГКО</string>
     <string name="search_bar_hint">Введіть текст для пошуку</string>
+
+    <!-- Instructions -->
+    <string name="next_btn_title_instruct">Наступний крок</string>
+    <string name="next_btn_title_finish">Закінчити</string>
 </resources>

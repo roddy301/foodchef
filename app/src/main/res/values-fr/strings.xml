@@ -122,4 +122,8 @@
     <string name="recipe_download_option">Télécharger</string>
     <string name="signUp">S\'INSCRIRE</string>
     <string name="search_bar_hint">Entrez du texte à rechercher</string>
+
+    <!-- Instructions -->
+    <string name="next_btn_title_instruct">L\'étape suivante</string>
+    <string name="next_btn_title_finish">Terminer</string>
 </resources>

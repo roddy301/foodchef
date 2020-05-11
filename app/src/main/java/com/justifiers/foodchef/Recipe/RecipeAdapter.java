@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,12 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.justifiers.foodchef.R;
 import com.squareup.picasso.Picasso;
 
@@ -37,12 +44,15 @@ import java.util.Locale;
 import static android.content.Context.MODE_PRIVATE;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHolder> {
-
+    private static final String TAG = "RecipeAdapter";
     ArrayList<Recipe> recipeList;
     private Context ctx;
     OutputStream outputStream;
     private OnItemClickListener rlistener;
     String language;
+    DatabaseReference ref;
+    DatabaseReference ref_user_favourites;
+    FirebaseAuth mAuth;
 
     public RecipeAdapter(ArrayList<Recipe> recipeList, Context ctx) {
         this.recipeList = recipeList;
@@ -71,18 +81,32 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
     @Override
     public void onBindViewHolder(final recipeHolder holder, final int position) {
         Picasso.get().load(recipeList.get(position).getrImage()).into(holder.recipeImage);
-        if(language.equals("en")){
-            holder.recipeName.setText(recipeList.get(position).getrName());
-        } else if(language.equals("fr")){
+        if(language.equals("fr")){
             holder.recipeName.setText(recipeList.get(position).getrNameFr());
         } else if(language.equals("uk")){
-            holder.recipeName.setText(recipeList.get(position).getrNameUk());
+            holder.recipeName.setText(recipeList.get(position).getrNameUa());
         } else if(language.equals("hi")){
             holder.recipeName.setText(recipeList.get(position).getrNameHi());
+        } else {
+            holder.recipeName.setText(recipeList.get(position).getrName());
         }
+        if(mAuth.getCurrentUser() != null){
+            ref_user_favourites = FirebaseDatabase.getInstance().getReference().child("User").child(mAuth.getCurrentUser().getUid()).child("favourites").child(recipeList.get(position).getrName());
+            ref_user_favourites.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        holder.recipe_favourite_button.setChecked(true);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
         holder.recipeTime.setText(recipeList.get(position).getrTime());
-        holder.recipe_likes.setText(recipeList.get(position).getLikes());
-        recipeList.get(position).getrTime();
         holder.recipe_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,13 +117,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.recipe_menu_share:
-                                String image_path = Environment.getExternalStorageDirectory().getPath() + "/Recipe/" + recipeList.get(position).getrName() + "/" + recipeList.get(position).getrName().toLowerCase() + ".jpg";
-                                File file = new File(image_path);
-                                Uri imgUri = Uri.parse("file://" + file.getPath());
                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.setType("*/*");
-                                intent.putExtra(Intent.EXTRA_STREAM, imgUri);
-                                intent.putExtra(Intent.EXTRA_TEXT,recipeList.get(position).getrName());
+                                intent.putExtra(Intent.EXTRA_TEXT,"Recipe Name " + ": " + recipeList.get(position).getrName());
+                                intent.putExtra(Intent.EXTRA_TEXT,"Recipe Image " + ": " +recipeList.get(position).getrImage());
                                 intent.putExtra(Intent.EXTRA_TEXT,"Recipe Video " + ": " + recipeList.get(position).getrVideo());
                                 ctx.startActivity(intent.createChooser(intent, "Share Via"));
                                 break;
@@ -124,7 +145,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
         ImageView recipeImage;
         TextView recipeName;
         TextView recipeTime;
-        TextView recipe_likes;
         ImageButton recipe_popup;
         ToggleButton recipe_favourite_button;
 
@@ -133,9 +153,30 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
             recipeImage = itemView.findViewById(R.id.recycler_popular_today_image_view);
             recipeName = itemView.findViewById(R.id.recycler_popular_recipe_desc);
             recipeTime = itemView.findViewById(R.id.recycler_popular_today_time);
-            recipe_likes = itemView.findViewById(R.id.recycler_view_recipe_likes);
             recipe_popup = itemView.findViewById(R.id.recipe_popup);
             recipe_favourite_button = itemView.findViewById(R.id.recipe_favorite_icon);
+            mAuth = FirebaseAuth.getInstance();
+            if (mAuth.getCurrentUser() == null) {
+                recipe_favourite_button.setVisibility(View.INVISIBLE);
+            } else {
+                recipe_favourite_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if (listener != null) {
+                            final int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                if (recipe_favourite_button.isChecked()) {
+                                    Log.d(TAG, "onClick: Like_pressed");
+                                    listener.onLikeClick(position);
+                                } else {
+                                    Log.d(TAG, "onClick: UnLike_pressed");
+                                    listener.onUnLikeClick(position);
+                                }
+                            }
+                        }
+                    }
+                });
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,20 +184,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.recipeHold
                     if(listener != null){
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
+                            Log.d(TAG, "onClick: pressed");
                             listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-            recipe_favourite_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            if(!recipe_favourite_button.isChecked()){
-                                listener.onLikeClick(position);
-                            }
+
                         }
                     }
                 }

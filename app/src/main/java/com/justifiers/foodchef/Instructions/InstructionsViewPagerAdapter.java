@@ -35,14 +35,14 @@ public class InstructionsViewPagerAdapter extends PagerAdapter {
         InstructionItem step = mSteps.get(position);
 
         ImageView imgStep = layoutStep.findViewById(R.id.img_step);
-        Picasso.get().load(step.getImageURL())
+        Picasso.get().load(step.getVideoUrl())
                 .error(R.drawable.ic_asset_image_placeholder)
                 .placeholder(R.drawable.ic_asset_image_placeholder)
                 .into(imgStep);
 
 
         TextView txtInstruction = layoutStep.findViewById(R.id.txt_step_description);
-        txtInstruction.setText(step.getDescription());
+        txtInstruction.setText(step.getDescription(mContext));
 
         container.addView(layoutStep);
         return layoutStep;

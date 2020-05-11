@@ -1,6 +1,7 @@
 package com.justifiers.foodchef.LoginAndSignUp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,21 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
     }
 
     @Override
-    public void onBindViewHolder(@NonNull favouritesHolder holder, int position) {
+    public void onBindViewHolder(@NonNull favouritesHolder holder,final int position) {
         Picasso.get().load(favouritesList.get(position).getrImage()).into(holder.profile_recipe_image);
         holder.profile_recipe_time.setText(favouritesList.get(position).getrName());
         holder.profile_recipe_name.setText(favouritesList.get(position).getrName());
-        holder.profile_likes.setText(favouritesList.get(position).getrLikes());
+        holder.profile_favourite_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("*/*");
+                intent.putExtra(Intent.EXTRA_TEXT,"Recipe Name " + ": " +  favouritesList.get(position).getrName());
+                intent.putExtra(Intent.EXTRA_TEXT,"Recipe Image " + ": " +  favouritesList.get(position).getrImage());
+                intent.putExtra(Intent.EXTRA_TEXT,"Recipe Video " + ": " + favouritesList.get(position).getrVideo());
+                ctx.startActivity(intent.createChooser(intent, "Share Via"));
+            }
+        });
     }
 
     @Override
@@ -51,7 +62,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
         TextView profile_recipe_time;
         TextView profile_recipe_name;
         ToggleButton profile_favourite_icon;
-        TextView profile_likes;
         ImageButton profile_favourite_share;
         public favouritesHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,7 +69,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.fa
             profile_recipe_time = itemView.findViewById(R.id.profile_favourites_time);
             profile_recipe_name = itemView.findViewById(R.id.profile_favourites_food_name);
             profile_favourite_icon = itemView.findViewById(R.id.profile_favorite_icon);
-            profile_likes = itemView.findViewById(R.id.profile_recipe_likes);
             profile_favourite_share = itemView.findViewById(R.id.profile_favourite_share);
 
 
