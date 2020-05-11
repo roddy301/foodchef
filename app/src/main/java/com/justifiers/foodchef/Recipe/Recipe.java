@@ -10,7 +10,7 @@ public class Recipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String utensils;
+    private String Utensils;
     private Object ingredients;
     private String likes;
     private String rImage;
@@ -30,8 +30,8 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
-    public Recipe(String utensils, Object ingredients, String likes, String rImage, String rName, String rNameFr, String rNameUk, String rNameHi, String rTime, String rType, String rTypeFr, String rTypeUa, String rTypeHi, String rVideo, String rDescription, List<InstructionItem> rInstructionSteps) {
-        this.utensils = utensils;
+    public Recipe(String Utensils, Object ingredients, String likes, String rImage, String rName, String rNameFr, String rNameUk, String rNameHi, String rTime, String rType, String rTypeFr, String rTypeUa, String rTypeHi, String rVideo, String rDescription, List<InstructionItem> rInstructionSteps) {
+        this.Utensils = Utensils;
         this.ingredients = ingredients;
         this.likes = likes;
         this.rImage = rImage;
@@ -50,11 +50,11 @@ public class Recipe implements Serializable {
     }
 
     public String getUtensils() {
-        return utensils;
+        return Utensils;
     }
 
     public void setUtensils(String utensils) {
-        this.utensils = utensils;
+        this.Utensils = utensils;
     }
 
     public Object getIngredients() {

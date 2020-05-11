@@ -1,7 +1,10 @@
 package com.justifiers.foodchef;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -17,12 +20,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.justifiers.foodchef.BottomNavigationView.SearchFragment;
 import com.justifiers.foodchef.Instructions.InstructionsActivity;
 import com.justifiers.foodchef.Recipe.Recipe;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+
+import nl.dionsegijn.steppertouch.OnStepCallback;
+import nl.dionsegijn.steppertouch.StepperTouch;
 
 public class RecipeView extends AppCompatActivity {
 
@@ -44,6 +67,7 @@ public class RecipeView extends AppCompatActivity {
     private MediaController mediaController;
 
 
+
     String url = "https://foodchef-d5481.firebaseio.com/";
     String videoURL;
     Recipe recipe;
@@ -63,14 +87,6 @@ public class RecipeView extends AppCompatActivity {
         recipe_name.setText(recipe.getrName());
 
         setupVideo();
-
-        ScrollView scrollView = findViewById(R.id.scrollView);
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                mediaController.hide();
-            }
-        });
 
         TextView duration = findViewById(R.id.durationValue);
         duration.setText(recipe.getrTime());
@@ -102,35 +118,21 @@ public class RecipeView extends AppCompatActivity {
             }
         });
 
-        minus = findViewById(R.id.minusRecipe);
-        add = findViewById(R.id.addRecipe);
-        serving = findViewById(R.id.sevingCount);
-
-        minus.setOnClickListener(new View.OnClickListener() {
+        StepperTouch stepperTouch = findViewById(R.id.stepperTouch);
+        stepperTouch.setMinValue(1);
+        stepperTouch.setMaxValue(10);
+        stepperTouch.setSideTapEnabled(true);
+        stepperTouch.addStepCallback(new OnStepCallback() {
             @Override
-            public void onClick(View v) {
-                int count = Integer.parseInt(serving.getText().toString());
-                if (count > 1) {
-                    count--;
-                    String value = String.valueOf(count);
-                    serving.setText(value);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Serving cannot be less than 1", Toast.LENGTH_SHORT);
-                }
-            }
-        });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.parseInt(serving.getText().toString());
-                count++;
-                String value = String.valueOf(count);
-                serving.setText(value);
+            public void onStep(int value, boolean positive) {
+                Toast.makeText(getApplicationContext(), value + "", Toast.LENGTH_SHORT).show();
             }
         });
 
         setupPreparationButton();
     }
+
+
 
     protected void setupVideo() {
 
@@ -155,6 +157,14 @@ public class RecipeView extends AppCompatActivity {
         videoView.setVideoURI(uri);
         videoView.requestFocus();
         videoView.start();
+
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                mediaController.hide();
+            }
+        });
     }
 
     protected void setupPreparationButton() {
@@ -170,5 +180,5 @@ public class RecipeView extends AppCompatActivity {
             }
         });
     }
-
 }
+
