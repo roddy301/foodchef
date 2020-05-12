@@ -11,6 +11,3 @@
 
 ## Getting Started
 Recipe application that provides a cooking video along with step-by-step written instructions; and it can be used in multiple languages such as English, French, Ukrainian, and Hindi. Firebase is used for storing data like cooking steps, required utensils and ingredients list, and for login/signup functionality.
-
-## GitLab Link
-https://git.cs.dal.ca/herasimov/foodchef
